@@ -5,11 +5,10 @@ import useGetMyUser from '@/hooks/useGetMyUser'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
-  console.log(user)
   return (
-    <section className="flex h-dvh">
+    <section className="flex h-dvh gap-5">
       <Sidebar />
-      <Header />
+      {user && <Header {...user} />}
       <HabitManager />
     </section>
   )
