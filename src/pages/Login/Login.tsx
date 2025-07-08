@@ -1,12 +1,16 @@
 import type z from 'zod'
 import { LoginUserForm } from '../../components/auth/LoginUserForm'
-import { api } from '@/configs/axios'
 import type { loginFormSchema } from '@/schemas/forms-schemas'
+import { login } from '@/services/auth/useLogin'
+import { useAuthStore } from '@/store/authStore'
 
 const Login = () => {
+  const { saveToken } = useAuthStore()
+
   const onSubmitLogin = async (e: z.infer<typeof loginFormSchema>) => {
-    const { data } = await api.post('/auth/login', { ...e })
-    console.log(data)
+    const { message, token } = await login(e)
+    if (!token) alert(message)
+    saveToken(token)
   }
 
   return (
