@@ -1,8 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/font/Satoshi-Variable.ttf") format("truetype");
+  font-display: swap;
+}
+
 body {
   background-color: #f7f9fb;
+  font-family: "Satoshi";
 }
 
 @theme inline {
