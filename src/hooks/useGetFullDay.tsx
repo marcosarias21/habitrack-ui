@@ -1,27 +1,18 @@
+import { days, months } from '@/data/utils'
+
 const useGetFullDay = () => {
   const day = new Date()
   const dayActual = day.getDate()
+  const dayIndex = day.getDay()
   const yearActual = day.getFullYear()
   const monthsIndex = day.getMonth()
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
   const monthActual = months[monthsIndex]
+  const dayNameActual = days[dayIndex]
   const dataDay = {
     dayActual,
     yearActual,
     monthActual,
+    dayNameActual,
   }
 
   return { dataDay }

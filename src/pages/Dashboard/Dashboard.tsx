@@ -1,4 +1,4 @@
-import { HabitManager } from '@/components/habits/HabitManager'
+import { HabitDashboard } from '@/components/habits/HabitDashboard'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import useGetFullDay from '@/hooks/useGetFullDay'
@@ -12,7 +12,7 @@ const Dashboard = () => {
       <Sidebar />
       <section className="flex w-full flex-col gap-10 pr-5">
         {user && <Header {...user} />}
-        <HabitManager />
+        <HabitDashboard dataDay={dataDay} />
       </section>
     </section>
   )
