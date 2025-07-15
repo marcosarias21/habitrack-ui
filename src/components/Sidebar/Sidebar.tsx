@@ -6,7 +6,10 @@ const Sidebar = () => {
     <div className="flex w-70 flex-col items-center justify-between border-r-1 bg-[#fff]">
       <div className="mt-5">
         <h3 className="text-2xl font-bold tracking-wider">
-          <span className="text-blue-400">Habit</span> Track
+          <span className="ml-0.5 rounded-sm bg-blue-400 p-1 px-2 leading-none font-medium text-white">
+            Habit
+          </span>{' '}
+          Track
         </h3>
       </div>
       <div className="flex flex-col gap-5">
