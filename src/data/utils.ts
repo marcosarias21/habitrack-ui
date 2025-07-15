@@ -22,3 +22,34 @@ export const days = [
   'Friday',
   'Saturday',
 ]
+
+export const daysToGroup = [
+  {
+    day: 'Mo',
+    numberDay: 1,
+  },
+  {
+    day: 'Tu',
+    numberDay: 2,
+  },
+  {
+    day: 'We',
+    numberDay: 3,
+  },
+  {
+    day: 'Th',
+    numberDay: 4,
+  },
+  {
+    day: 'Fr',
+    numberDay: 5,
+  },
+  {
+    day: 'Sa',
+    numberDay: 6,
+  },
+  {
+    day: 'Su',
+    numberDay: 7,
+  },
+]

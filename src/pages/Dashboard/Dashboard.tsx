@@ -13,10 +13,12 @@ const Dashboard = () => {
       <Sidebar />
       <section className="flex w-full flex-col gap-10 pr-5">
         {user && <Header {...user} />}
-        <div className="rounded-lg bg-white p-4 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="flex h-fit w-full justify-between rounded-lg bg-[#fff] p-4">
+          <div className="flex w-full justify-between">
             <DateSection {...dataDay} />
-            <ModalCreateHabit />
+            <div>
+              <ModalCreateHabit />
+            </div>
           </div>
         </div>
       </section>
