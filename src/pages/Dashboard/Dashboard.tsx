@@ -1,4 +1,5 @@
-import { HabitDashboard } from '@/components/habits/HabitDashboard'
+import { DateSection } from '@/components/habits/DateSection'
+import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import useGetFullDay from '@/hooks/useGetFullDay'
@@ -12,7 +13,12 @@ const Dashboard = () => {
       <Sidebar />
       <section className="flex w-full flex-col gap-10 pr-5">
         {user && <Header {...user} />}
-        <HabitDashboard dataDay={dataDay} />
+        <div className="rounded-lg bg-white p-4 shadow-sm">
+          <div className="flex items-center justify-between">
+            <DateSection {...dataDay} />
+            <ModalCreateHabit />
+          </div>
+        </div>
       </section>
     </section>
   )
