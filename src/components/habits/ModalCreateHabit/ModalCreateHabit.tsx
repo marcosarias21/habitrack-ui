@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
 import { DaysGroup } from '../DaysGroup'
+import { WeeklyOption } from '../WeeklyOption'
 
 const ModalCreateHabit = () => {
   const [isSelected, setIsSelected] = useState<string>('daily')
@@ -35,7 +36,9 @@ const ModalCreateHabit = () => {
                 Weekly
               </button>
             </div>
-            <div>{isSelected === 'daily' ? <DaysGroup /> : 'Weekly'}</div>
+            <div>
+              {isSelected === 'daily' ? <DaysGroup /> : <WeeklyOption />}
+            </div>
           </div>
         </form>
       </DialogContent>
