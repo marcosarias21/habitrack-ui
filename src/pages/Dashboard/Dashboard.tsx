@@ -2,9 +2,9 @@ import { DateSection } from '@/components/habits/DateSection'
 import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
-import { api } from '@/configs/axios'
 import useGetFullDay from '@/hooks/useGetFullDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
+import { useCreateHabit } from '@/services/habit/useHabit'
 import { useHabitStore } from '@/store/habitStore'
 
 const Dashboard = () => {
@@ -13,12 +13,7 @@ const Dashboard = () => {
   const { dataDay } = useGetFullDay()
 
   const createHabit = async (name: string, frequency: string) => {
-    const habitResp = await api.post('/habit/createHabit', {
-      idUser: user?._id,
-      name,
-      frequency,
-      daysOfWeek: days,
-    })
+    await useCreateHabit(user?._id, name, frequency, days)
   }
   return (
     <section className="flex h-dvh gap-5">
