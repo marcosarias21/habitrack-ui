@@ -4,10 +4,17 @@ import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import useGetFullDay from '@/hooks/useGetFullDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
+import { useCreateHabit } from '@/services/habit/useHabit'
+import { useHabitStore } from '@/store/habitStore'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
+  const { days } = useHabitStore()
   const { dataDay } = useGetFullDay()
+
+  const createHabit = async (name: string, frequency: string) => {
+    await useCreateHabit(user?._id, name, frequency, days)
+  }
   return (
     <section className="flex h-dvh gap-5">
       <Sidebar />
@@ -17,7 +24,7 @@ const Dashboard = () => {
           <div className="flex w-full justify-between">
             <DateSection {...dataDay} />
             <div>
-              <ModalCreateHabit />
+              <ModalCreateHabit createHabit={createHabit} />
             </div>
           </div>
         </div>
