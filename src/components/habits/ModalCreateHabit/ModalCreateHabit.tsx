@@ -8,22 +8,36 @@ import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { habitSchema } from '@/schemas/forms-schemas'
+import type z from 'zod'
 
-const ModalCreateHabit = () => {
+interface Prop {
+  createHabit: (e: z.infer<typeof habitSchema>, frequency: string) => void
+}
+
+const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
   const [isSelected, setIsSelected] = useState<string>('daily')
   const { register, handleSubmit } = useForm({
     resolver: zodResolver(habitSchema),
   })
+
+  const onSubmit = (e: z.infer<typeof habitSchema>) => {
+    createHabit(e, isSelected)
+  }
+
   return (
     <Dialog>
       <DialogTrigger className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white">
         + New Habit
       </DialogTrigger>
       <DialogContent>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-1">
             <Label>Habit Name</Label>
-            <Input type="text" placeholder="Read a book..." />
+            <Input
+              type="text"
+              placeholder="Read a book..."
+              {...register('name')}
+            />
           </div>
           <div className="mt-5">
             <h2 className="text-lg font-medium">Repeat</h2>

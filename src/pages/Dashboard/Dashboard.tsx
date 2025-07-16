@@ -2,12 +2,29 @@ import { DateSection } from '@/components/habits/DateSection'
 import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
+import { api } from '@/configs/axios'
 import useGetFullDay from '@/hooks/useGetFullDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
+import type { habitSchema } from '@/schemas/forms-schemas'
+import { useHabitStore } from '@/store/habitStore'
+import type z from 'zod'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
+  const { days } = useHabitStore()
   const { dataDay } = useGetFullDay()
+
+  const createHabit = async (
+    e: z.infer<typeof habitSchema>,
+    frequency: string,
+  ) => {
+    const habitResp = await api.post('/habit/createHabit', {
+      user: user?._id,
+      name: e.name,
+      frequency,
+      daysOfWeek: days,
+    })
+  }
   return (
     <section className="flex h-dvh gap-5">
       <Sidebar />
@@ -17,7 +34,7 @@ const Dashboard = () => {
           <div className="flex w-full justify-between">
             <DateSection {...dataDay} />
             <div>
-              <ModalCreateHabit />
+              <ModalCreateHabit createHabit={createHabit} />
             </div>
           </div>
         </div>
