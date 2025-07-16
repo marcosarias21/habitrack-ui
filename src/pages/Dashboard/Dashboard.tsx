@@ -5,22 +5,17 @@ import { Sidebar } from '@/components/Sidebar'
 import { api } from '@/configs/axios'
 import useGetFullDay from '@/hooks/useGetFullDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
-import type { habitSchema } from '@/schemas/forms-schemas'
 import { useHabitStore } from '@/store/habitStore'
-import type z from 'zod'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { days } = useHabitStore()
   const { dataDay } = useGetFullDay()
 
-  const createHabit = async (
-    e: z.infer<typeof habitSchema>,
-    frequency: string,
-  ) => {
+  const createHabit = async (name: string, frequency: string) => {
     const habitResp = await api.post('/habit/createHabit', {
-      user: user?._id,
-      name: e.name,
+      idUser: user?._id,
+      name,
       frequency,
       daysOfWeek: days,
     })

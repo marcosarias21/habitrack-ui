@@ -5,23 +5,17 @@ import { useState } from 'react'
 import { DaysGroup } from '../DaysGroup'
 import { WeeklyOption } from '../WeeklyOption'
 import { Button } from '@/components/ui/button'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { habitSchema } from '@/schemas/forms-schemas'
-import type z from 'zod'
 
 interface Prop {
-  createHabit: (e: z.infer<typeof habitSchema>, frequency: string) => void
+  createHabit: (name: string, frequency: string) => void
 }
 
 const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
   const [isSelected, setIsSelected] = useState<string>('daily')
-  const { register, handleSubmit } = useForm({
-    resolver: zodResolver(habitSchema),
-  })
+  const [name, setName] = useState<string>('')
 
-  const onSubmit = (e: z.infer<typeof habitSchema>) => {
-    createHabit(e, isSelected)
+  const onSubmit = () => {
+    createHabit(name, isSelected)
   }
 
   return (
@@ -30,13 +24,14 @@ const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
         + New Habit
       </DialogTrigger>
       <DialogContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form>
           <div className="flex flex-col gap-1">
             <Label>Habit Name</Label>
             <Input
               type="text"
               placeholder="Read a book..."
-              {...register('name')}
+              value={name}
+              onChange={({ target }) => setName(target.value)}
             />
           </div>
           <div className="mt-5">
@@ -63,7 +58,8 @@ const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
           </div>
           <div className="mt-5 w-full">
             <Button
-              type="submit"
+              type="reset"
+              onClick={onSubmit}
               className="w-full bg-red-500 py-5 hover:bg-red-400"
             >
               Add Habit
