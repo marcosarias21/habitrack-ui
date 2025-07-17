@@ -14,7 +14,6 @@ const Dashboard = () => {
   const { days } = useHabitStore()
   const { dataDay } = useGetFullDay()
   const { habitData } = useGetHabitData(user?._id, dataDay.dayIndex)
-  console.log(habitData)
   const createHabit = async (name: string, frequency: string) => {
     await useCreateHabit(user?._id, name, frequency, days)
   }
