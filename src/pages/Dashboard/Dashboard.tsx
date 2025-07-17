@@ -3,6 +3,7 @@ import { HabitCard } from '@/components/habits/HabitCard'
 import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
+import { api } from '@/configs/axios'
 import useGetFullDay from '@/hooks/useGetFullDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import { useCreateHabit } from '@/services/habit/useHabit'
@@ -12,10 +13,18 @@ const Dashboard = () => {
   const { user } = useGetMyUser()
   const { days } = useHabitStore()
   const { dataDay } = useGetFullDay()
-
   const createHabit = async (name: string, frequency: string) => {
     await useCreateHabit(user?._id, name, frequency, days)
   }
+  const getHabit = async () => {
+    const { data } = await api.get('/habit/getHabits', {
+      params: {
+        idUser: user?._id,
+        today: dataDay.dayIndex,
+      },
+    })
+  }
+  getHabit()
   return (
     <section className="flex h-dvh gap-5">
       <Sidebar />
