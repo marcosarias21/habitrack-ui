@@ -23,15 +23,17 @@ const Dashboard = () => {
       <Sidebar />
       <section className="flex w-full flex-col gap-10 pr-5">
         {user && <Header {...user} />}
-        <div className="rounded-lg bg-[#fff] p-4">
+        <div className="rounded-lg bg-[#FEFEFE] p-4">
           <div className="flex h-fit w-full justify-between">
             <div className="flex w-full justify-between">
               <DateSection {...dataDay} />
               <ModalCreateHabit createHabit={createHabit} />
             </div>
           </div>
-          <div className="mt-10 px-10">
-            <HabitCard />
+          <div className="mt-10 flex flex-col gap-5 px-10">
+            {habitData.map((habit) => (
+              <HabitCard {...habit} />
+            ))}
           </div>
         </div>
       </section>
