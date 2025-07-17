@@ -20,7 +20,7 @@ const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
 
   return (
     <Dialog>
-      <DialogTrigger className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white">
+      <DialogTrigger className="h-fit rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white">
         + New Habit
       </DialogTrigger>
       <DialogContent>

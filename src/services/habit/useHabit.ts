@@ -14,3 +14,16 @@ export const useCreateHabit = async (
   })
   alert(data.message)
 }
+
+export const useGetHabit = async (
+  idUser: string | undefined,
+  today: number,
+) => {
+  const { data } = await api.get('/habit/getHabits', {
+    params: {
+      idUser,
+      today,
+    },
+  })
+  return data
+}
