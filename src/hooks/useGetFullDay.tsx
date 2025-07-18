@@ -13,6 +13,7 @@ const useGetFullDay = () => {
     yearActual,
     monthActual,
     dayNameActual,
+    monthsIndex,
     dayIndex,
   }
 

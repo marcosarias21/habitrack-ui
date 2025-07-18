@@ -31,8 +31,8 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="mt-10 flex flex-col gap-5 px-10">
-            {habitData.map((habit) => (
-              <HabitCard {...habit} />
+            {habitData?.map((habit) => (
+              <HabitCard key={habit._id} {...habit} />
             ))}
           </div>
         </div>

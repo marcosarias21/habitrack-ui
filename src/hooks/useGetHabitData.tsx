@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react'
 
 const useGetHabitData = (idUser: string | undefined, today: number) => {
   const [habitData, setHabitData] = useState<Habit[]>([])
+  const date = new Date()
+  const fullDate = date.toLocaleDateString('es-AR')
 
   const getHabit = async () => {
-    const { habit } = await useGetHabit(idUser, today)
-    setHabitData(habit)
+    const { habits } = await useGetHabit(idUser, today, fullDate)
+    setHabitData(habits)
   }
 
   useEffect(() => {
