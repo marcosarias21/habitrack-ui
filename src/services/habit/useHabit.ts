@@ -20,6 +20,7 @@ export const useGetHabit = async (
   today: number,
   fullDate: string,
 ) => {
+  console.log(idUser)
   const { data } = await api.get('/habit/getHabits', {
     params: {
       idUser,
@@ -27,6 +28,7 @@ export const useGetHabit = async (
       date: fullDate,
     },
   })
+  console.log(data)
   return data
 }
 
