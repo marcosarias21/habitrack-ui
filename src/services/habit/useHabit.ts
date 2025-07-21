@@ -29,3 +29,10 @@ export const useGetHabit = async (
   })
   return data
 }
+
+export const completeHabit = async (id: string, date: string) => {
+  const { data } = await api.put(`/completeHabit/${id}`, {
+    date,
+  })
+  if (data) alert(data.message)
+}
