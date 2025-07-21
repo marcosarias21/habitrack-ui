@@ -31,7 +31,7 @@ export const useGetHabit = async (
 }
 
 export const completeHabit = async (id: string, date: string) => {
-  const { data } = await api.put(`/completeHabit/${id}`, {
+  const { data } = await api.put(`/habit/completeHabit/${id}`, {
     date,
   })
   if (data) alert(data.message)

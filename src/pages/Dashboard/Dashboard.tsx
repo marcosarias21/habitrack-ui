@@ -6,7 +6,7 @@ import { Sidebar } from '@/components/Sidebar'
 import useGetFullDay from '@/hooks/useGetFullDay'
 import useGetHabitData from '@/hooks/useGetHabitData'
 import useGetMyUser from '@/hooks/useGetMyUser'
-import { useCreateHabit } from '@/services/habit/useHabit'
+import { completeHabit, useCreateHabit } from '@/services/habit/useHabit'
 import { useHabitStore } from '@/store/habitStore'
 
 const Dashboard = () => {
@@ -14,8 +14,13 @@ const Dashboard = () => {
   const { days } = useHabitStore()
   const { dataDay } = useGetFullDay()
   const { habitData } = useGetHabitData(user?._id, dataDay.dayIndex)
+
   const createHabit = async (name: string, frequency: string) => {
     await useCreateHabit(user?._id, name, frequency, days)
+  }
+
+  const onCompleteHabit = async (id: string, date: string) => {
+    await completeHabit(id, date)
   }
 
   return (
@@ -32,7 +37,11 @@ const Dashboard = () => {
           </div>
           <div className="mt-10 flex flex-col gap-5 px-10">
             {habitData?.map((habit) => (
-              <HabitCard key={habit._id} {...habit} />
+              <HabitCard
+                key={habit._id}
+                {...habit}
+                onCompleteHabit={onCompleteHabit}
+              />
             ))}
           </div>
         </div>
