@@ -1,6 +1,7 @@
 import { DateSection } from '@/components/habits/DateSection'
 import { HabitCard } from '@/components/habits/HabitCard'
 import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
+import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import useGetFullDay from '@/hooks/useGetFullDay'
@@ -63,7 +64,7 @@ const Dashboard = () => {
               ))}
             </div>
           ) : (
-            <div>Great job! You have completed all your habits for today</div>
+            <NoPendingHabits />
           )}
         </div>
       </section>
