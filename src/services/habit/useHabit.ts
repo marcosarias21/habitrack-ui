@@ -27,7 +27,6 @@ export const useGetHabit = async (
       date: fullDate,
     },
   })
-  console.log(data)
   return data
 }
 

@@ -4,7 +4,7 @@ import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
-import useGetFullDay from '@/hooks/useGetFullDay'
+import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import type { Habit } from '@/interfaces/habit/Habit'
 import {
@@ -18,13 +18,11 @@ import { useEffect, useState } from 'react'
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { days } = useHabitStore()
-  const { dataDay } = useGetFullDay()
-  const date = new Date()
-  const fullDate = date.toLocaleDateString('es-AR')
+  const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
   const [habitsData, setHabitsData] = useState<Habit[]>([])
 
   const getHabit = async () => {
-    const { habits } = await useGetHabit(user?._id, dataDay.dayIndex, fullDate)
+    const { habits } = await useGetHabit(user?._id, dayIndex, fullDate)
     setHabitsData(habits)
   }
 
@@ -39,7 +37,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getHabit()
-  }, [user])
+  }, [user, day])
 
   return (
     <section className="flex h-dvh gap-5">
@@ -49,7 +47,12 @@ const Dashboard = () => {
         <div className="rounded-lg bg-[#FEFEFE] p-4">
           <div className="flex h-fit w-full justify-between">
             <div className="flex w-full justify-between">
-              <DateSection {...dataDay} />
+              <DateSection
+                fullDate={fullDate}
+                dayName={dayName}
+                setDay={setDay}
+                day={day}
+              />
               <ModalCreateHabit createHabit={createHabit} />
             </div>
           </div>
