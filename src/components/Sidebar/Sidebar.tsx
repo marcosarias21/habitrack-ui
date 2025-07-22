@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../ui/button'
-import { LogOut } from 'lucide-react'
+import { Folder, LogOut } from 'lucide-react'
 const Sidebar = () => {
+  const { pathname } = useLocation()
   return (
     <div className="flex w-70 flex-col items-center justify-between border-r-1 bg-[#fff]">
       <div className="mt-5">
@@ -12,12 +13,24 @@ const Sidebar = () => {
           Track
         </h3>
       </div>
-      <div className="flex flex-col gap-5">
-        <Link to={''}>All habits</Link>
-        <Link to={''}>Statistic</Link>
+      <div className="flex flex-col items-center gap-5">
+        <div
+          className={`flex w-40 gap-2 rounded px-2 py-2 text-center font-medium tracking-wide text-gray-500 transition-colors hover:bg-blue-400 hover:text-white ${pathname == '/dashboard' && 'bg-blue-400 text-white'}`}
+        >
+          <Folder />
+          <Link to="">All Habits</Link>
+        </div>
+        <div className="flex w-40 gap-2 rounded px-2 py-2 text-center font-medium tracking-wide text-gray-500 transition-colors hover:bg-blue-400 hover:text-white">
+          <Folder />
+
+          <Link to="">Stadistics</Link>
+        </div>
       </div>
       <div className="mb-5 w-full">
-        <Button className="h-full w-full py-5" variant={'secondary'}>
+        <Button
+          className="h-full w-full rounded-none py-5"
+          variant={'secondary'}
+        >
           <LogOut color="black" /> Sign Out
         </Button>
       </div>
