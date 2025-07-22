@@ -1,6 +1,7 @@
 import { DateSection } from '@/components/habits/DateSection'
 import { HabitCard } from '@/components/habits/HabitCard'
 import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
+import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import useGetFullDay from '@/hooks/useGetFullDay'
@@ -52,15 +53,19 @@ const Dashboard = () => {
               <ModalCreateHabit createHabit={createHabit} />
             </div>
           </div>
-          <div className="mt-10 flex flex-col gap-5 px-10">
-            {habitsData?.map((habit) => (
-              <HabitCard
-                key={habit._id}
-                {...habit}
-                onCompleteHabit={onCompleteHabit}
-              />
-            ))}
-          </div>
+          {habitsData.length > 0 ? (
+            <div className="mt-10 flex flex-col gap-5 px-10">
+              {habitsData?.map((habit) => (
+                <HabitCard
+                  key={habit._id}
+                  {...habit}
+                  onCompleteHabit={onCompleteHabit}
+                />
+              ))}
+            </div>
+          ) : (
+            <NoPendingHabits />
+          )}
         </div>
       </section>
     </section>
