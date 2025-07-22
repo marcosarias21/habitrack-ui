@@ -4,8 +4,8 @@ import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
+import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
-import useNextDay from '@/hooks/useNextDay'
 import type { Habit } from '@/interfaces/habit/Habit'
 import {
   completeHabit,
@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react'
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { days } = useHabitStore()
-  const { fullDate, dayIndex, dayName, setDay, day } = useNextDay()
+  const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
   const [habitsData, setHabitsData] = useState<Habit[]>([])
 
   const getHabit = async () => {

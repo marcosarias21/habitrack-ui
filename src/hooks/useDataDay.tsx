@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const useNextDay = () => {
+const useDataDay = () => {
   const [day, setDay] = useState<number>(0)
   const date = new Date()
   date.setDate(date.getDate() + day)
@@ -17,4 +17,4 @@ const useNextDay = () => {
   }
 }
 
-export default useNextDay
+export default useDataDay
