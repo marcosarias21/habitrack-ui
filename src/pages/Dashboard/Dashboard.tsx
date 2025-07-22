@@ -6,6 +6,7 @@ import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import useGetFullDay from '@/hooks/useGetFullDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
+import useNextDay from '@/hooks/useNextDay'
 import type { Habit } from '@/interfaces/habit/Habit'
 import {
   completeHabit,
@@ -18,13 +19,11 @@ import { useEffect, useState } from 'react'
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { days } = useHabitStore()
-  const { dataDay } = useGetFullDay()
-  const date = new Date()
-  const fullDate = date.toLocaleDateString('es-AR')
+  const { fullDate, dayIndex, dayName } = useNextDay()
   const [habitsData, setHabitsData] = useState<Habit[]>([])
 
   const getHabit = async () => {
-    const { habits } = await useGetHabit(user?._id, dataDay.dayIndex, fullDate)
+    const { habits } = await useGetHabit(user?._id, dayIndex, fullDate)
     setHabitsData(habits)
   }
 
@@ -49,7 +48,7 @@ const Dashboard = () => {
         <div className="rounded-lg bg-[#FEFEFE] p-4">
           <div className="flex h-fit w-full justify-between">
             <div className="flex w-full justify-between">
-              <DateSection {...dataDay} />
+              <DateSection fullDate={fullDate} dayName={dayName} />
               <ModalCreateHabit createHabit={createHabit} />
             </div>
           </div>
