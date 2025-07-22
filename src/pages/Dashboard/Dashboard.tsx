@@ -52,15 +52,19 @@ const Dashboard = () => {
               <ModalCreateHabit createHabit={createHabit} />
             </div>
           </div>
-          <div className="mt-10 flex flex-col gap-5 px-10">
-            {habitsData?.map((habit) => (
-              <HabitCard
-                key={habit._id}
-                {...habit}
-                onCompleteHabit={onCompleteHabit}
-              />
-            ))}
-          </div>
+          {habitsData.length > 0 ? (
+            <div className="mt-10 flex flex-col gap-5 px-10">
+              {habitsData?.map((habit) => (
+                <HabitCard
+                  key={habit._id}
+                  {...habit}
+                  onCompleteHabit={onCompleteHabit}
+                />
+              ))}
+            </div>
+          ) : (
+            <div>Great job! You have completed all your habits for today</div>
+          )}
         </div>
       </section>
     </section>
