@@ -4,7 +4,6 @@ import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
-import useGetFullDay from '@/hooks/useGetFullDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useNextDay from '@/hooks/useNextDay'
 import type { Habit } from '@/interfaces/habit/Habit'
@@ -19,7 +18,7 @@ import { useEffect, useState } from 'react'
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { days } = useHabitStore()
-  const { fullDate, dayIndex, dayName } = useNextDay()
+  const { fullDate, dayIndex, dayName, setDay, day } = useNextDay()
   const [habitsData, setHabitsData] = useState<Habit[]>([])
 
   const getHabit = async () => {
@@ -38,7 +37,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getHabit()
-  }, [user])
+  }, [user, day])
 
   return (
     <section className="flex h-dvh gap-5">
@@ -48,7 +47,12 @@ const Dashboard = () => {
         <div className="rounded-lg bg-[#FEFEFE] p-4">
           <div className="flex h-fit w-full justify-between">
             <div className="flex w-full justify-between">
-              <DateSection fullDate={fullDate} dayName={dayName} />
+              <DateSection
+                fullDate={fullDate}
+                dayName={dayName}
+                setDay={setDay}
+                day={day}
+              />
               <ModalCreateHabit createHabit={createHabit} />
             </div>
           </div>

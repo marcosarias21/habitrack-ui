@@ -1,16 +1,16 @@
 import { useState } from 'react'
 
 const useNextDay = () => {
-  const [nextDay, setNextDay] = useState<number>(0)
+  const [day, setDay] = useState<number>(0)
   const date = new Date()
-  date.setDate(date.getDate() + nextDay)
+  date.setDate(date.getDate() + day)
   const fullDate = date.toLocaleDateString('es-AR')
   const dayIndex = date.getDay()
   const dayName = date.toLocaleDateString('en-US', { weekday: 'long' })
 
   return {
-    nextDay,
-    setNextDay,
+    day,
+    setDay,
     fullDate,
     dayIndex,
     dayName,
