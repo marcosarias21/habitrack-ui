@@ -2,6 +2,7 @@ import { DateSection } from '@/components/habits/DateSection'
 import { HabitCard } from '@/components/habits/HabitCard'
 import { ModalCreateHabit } from '@/components/habits/ModalCreateHabit'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
+import { StatisticsHabit } from '@/components/habits/StatisticsHabit'
 import { Header } from '@/components/Header'
 import { Sidebar } from '@/components/Sidebar'
 import useDataDay from '@/hooks/useDataDay'
@@ -42,7 +43,7 @@ const Dashboard = () => {
   return (
     <section className="grid h-dvh grid-cols-12 gap-4">
       <Sidebar />
-      <section className="col-span-8 flex w-full flex-col gap-10">
+      <section className="col-span-7 flex w-full flex-col gap-10">
         {user && <Header {...user} />}
         <div className="rounded-lg bg-[#FEFEFE] p-4">
           <div className="flex h-fit w-full justify-between">
@@ -71,7 +72,9 @@ const Dashboard = () => {
           )}
         </div>
       </section>
-      <section className="col-span-2 mr-4 bg-[#fff] px-5">Statistics</section>
+      <section className="col-span-3 mr-5 bg-[#fff] px-7">
+        <StatisticsHabit />
+      </section>
     </section>
   )
 }
