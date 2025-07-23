@@ -20,11 +20,19 @@ const Dashboard = () => {
   const { user } = useGetMyUser()
   const { days } = useHabitStore()
   const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
+  const [percentageDone, setPercentageDone] = useState<number>(0)
   const [habitsData, setHabitsData] = useState<Habit[]>([])
 
   const getHabit = async () => {
-    const { habits } = await useGetHabit(user?._id, dayIndex, fullDate)
-    setHabitsData(habits)
+    const { habitsNotDone, allHabitsToday } = await useGetHabit(
+      user?._id,
+      dayIndex,
+      fullDate,
+    )
+    const doneCount = allHabitsToday - habitsNotDone.length
+    const percentage = (doneCount / allHabitsToday) * 100
+    setPercentageDone(percentage)
+    setHabitsData(habitsNotDone)
   }
 
   const createHabit = async (name: string, frequency: string) => {
@@ -73,7 +81,7 @@ const Dashboard = () => {
         </div>
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
-        <StatisticsHabit />
+        <StatisticsHabit percentageDone={percentageDone} />
       </section>
     </section>
   )
