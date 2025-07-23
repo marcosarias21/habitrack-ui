@@ -40,9 +40,9 @@ const Dashboard = () => {
   }, [user, day])
 
   return (
-    <section className="flex h-dvh gap-5">
+    <section className="grid h-dvh grid-cols-12 gap-4">
       <Sidebar />
-      <section className="flex w-full flex-col gap-10 pr-5">
+      <section className="col-span-8 flex w-full flex-col gap-10">
         {user && <Header {...user} />}
         <div className="rounded-lg bg-[#FEFEFE] p-4">
           <div className="flex h-fit w-full justify-between">
@@ -71,6 +71,7 @@ const Dashboard = () => {
           )}
         </div>
       </section>
+      <section className="col-span-2 mr-4 bg-[#fff] px-5">Statistics</section>
     </section>
   )
 }
