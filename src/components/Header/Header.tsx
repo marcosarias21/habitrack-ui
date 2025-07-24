@@ -4,7 +4,7 @@ import { Search } from 'lucide-react'
 
 const Header = ({ email }: UserAuthenticated) => {
   return (
-    <div className="mt-2 flex h-fit w-full justify-between rounded-lg bg-[#FEFEFE] p-4">
+    <div className="mt-4 flex h-fit w-full justify-between rounded-lg bg-[#FEFEFE] p-4">
       <div className="flex w-full flex-col">
         <h2 className="text-lg">
           <span className="font-bold">Hi There,</span> {email}

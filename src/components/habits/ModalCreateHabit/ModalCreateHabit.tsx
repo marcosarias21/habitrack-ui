@@ -5,17 +5,19 @@ import { useState } from 'react'
 import { DaysGroup } from '../DaysGroup'
 import { WeeklyOption } from '../WeeklyOption'
 import { Button } from '@/components/ui/button'
+import { useHabitStore } from '@/store/habitStore'
 
 interface Prop {
-  createHabit: (name: string, frequency: string) => void
+  createHabit: (name: string, frequency: string, days: number[]) => void
 }
 
 const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
   const [isSelected, setIsSelected] = useState<string>('daily')
+  const { days } = useHabitStore()
   const [name, setName] = useState<string>('')
 
   const onSubmit = () => {
-    createHabit(name, isSelected)
+    createHabit(name, isSelected, days)
   }
 
   return (
