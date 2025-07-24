@@ -5,7 +5,7 @@ import { Book } from 'lucide-react'
 import type React from 'react'
 
 interface Prop extends Habit {
-  onCompleteHabit: (id: string, date: string) => void
+  onCompleteHabit?: (id: string, date: string) => void
 }
 
 const HabitCard: React.FC<Prop> = ({
@@ -31,7 +31,7 @@ const HabitCard: React.FC<Prop> = ({
           </span>
           <Button
             className="mt-2 bg-green-500 hover:bg-green-400"
-            onClick={() => onCompleteHabit(_id, date)}
+            onClick={() => onCompleteHabit?.(_id, date)}
           >
             Complete
           </Button>
