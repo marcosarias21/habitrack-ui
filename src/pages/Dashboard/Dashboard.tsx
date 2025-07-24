@@ -22,17 +22,16 @@ const Dashboard = () => {
   const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
   const [percentageDone, setPercentageDone] = useState<number>(0)
   const [habitsData, setHabitsData] = useState<Habit[]>([])
+  const [habitsCompleted, setHabitsCompleted] = useState<Habit[]>([])
 
   const getHabit = async () => {
-    const { habitsNotDone, allHabitsToday } = await useGetHabit(
-      user?._id,
-      dayIndex,
-      fullDate,
-    )
+    const { habitsNotDone, allHabitsToday, habitsCompleted } =
+      await useGetHabit(user?._id, dayIndex, fullDate)
     const doneCount = allHabitsToday - habitsNotDone.length
     const percentage = (doneCount / allHabitsToday) * 100
     setPercentageDone(percentage)
     setHabitsData(habitsNotDone)
+    setHabitsCompleted(habitsCompleted)
   }
 
   const createHabit = async (name: string, frequency: string) => {
@@ -51,7 +50,7 @@ const Dashboard = () => {
   return (
     <section className="grid h-dvh grid-cols-12 gap-4">
       <Sidebar />
-      <section className="col-span-7 flex w-full flex-col gap-10">
+      <section className="col-span-7 flex w-full flex-col gap-7">
         {user && <Header {...user} />}
         <div className="rounded-lg bg-[#FEFEFE] p-4">
           <div className="flex h-fit w-full justify-between">
@@ -78,6 +77,12 @@ const Dashboard = () => {
           ) : (
             <NoPendingHabits />
           )}
+        </div>
+        <div className="flex flex-col rounded-lg bg-[#fff] p-4">
+          <h2 className="font-bold">Habits Completed</h2>
+          {habitsCompleted.map((habit) => (
+            <HabitCard key={habit._id} {...habit} />
+          ))}
         </div>
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
