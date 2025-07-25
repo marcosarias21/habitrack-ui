@@ -4,14 +4,18 @@ import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { StatisticsHabit } from '@/components/habits/StatisticsHabit'
 import { Header } from '@/components/Header'
 import { ModalCreateHabit } from '@/components/modals/ModalCreateHabit'
+import { ModalEditHabit } from '@/components/modals/ModalEditHabit'
 import { Sidebar } from '@/components/Sidebar'
 import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useHabitLogic from '@/hooks/useHabitLogic'
+import { useHabitStore } from '@/store/habitStore'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
+  const { setHabit, habit } = useHabitStore()
+  console.log(habit)
   const {
     createHabit,
     habitsData,
@@ -44,12 +48,14 @@ const Dashboard = () => {
                   key={habit._id}
                   {...habit}
                   onCompleteHabit={onCompleteHabit}
+                  onClick={() => setHabit(habit)}
                 />
               ))}
             </div>
           ) : (
             <NoPendingHabits />
           )}
+          <ModalEditHabit {...habit} />
         </div>
         <div className="rounded-lg bg-[#fff] p-4">
           <h2 className="text-lg font-bold">Habits Completed</h2>

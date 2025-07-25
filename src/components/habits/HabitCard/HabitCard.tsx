@@ -6,6 +6,7 @@ import type React from 'react'
 
 interface Prop extends Habit {
   onCompleteHabit?: (id: string, date: string) => void
+  onClick?: () => void
 }
 
 const HabitCard: React.FC<Prop> = ({
@@ -13,6 +14,7 @@ const HabitCard: React.FC<Prop> = ({
   name,
   createdAt,
   onCompleteHabit,
+  onClick,
 }) => {
   const createdDay = new Date(createdAt)
   const d = new Date()
@@ -38,7 +40,7 @@ const HabitCard: React.FC<Prop> = ({
         </div>
       </div>
       <div className="flex items-center">
-        <DropdownActions />
+        <DropdownActions onClick={onClick} />
       </div>
     </div>
   )
