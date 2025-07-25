@@ -10,6 +10,7 @@ interface Action {
   setDays: (newDay: number) => void
   popDay: (newDay: number) => void
   setHabit: (newHabit: Habit) => void
+  resetDays: () => void
 }
 
 export const useHabitStore = create<State & Action>((set) => ({
@@ -22,4 +23,8 @@ export const useHabitStore = create<State & Action>((set) => ({
     set({
       habit: newHabit,
     }),
+  resetDays: () =>
+    set(() => ({
+      days: [],
+    })),
 }))

@@ -1,3 +1,5 @@
+import { DaysGroup } from '@/components/habits/DaysGroup'
+import { WeeklyOption } from '@/components/habits/WeeklyOption'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
@@ -8,21 +10,41 @@ import { DialogTitle } from '@radix-ui/react-dialog'
 
 type Prop = Partial<Habit>
 
-const ModalEditHabit: React.FC<Prop> = ({ name }) => {
+const ModalEditHabit: React.FC<Prop> = ({ name, frequency, daysOfWeek }) => {
+  console.log(daysOfWeek)
   const { open, setOpen } = useModalStore()
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
-        <DialogTitle>Edit Habit</DialogTitle>
+        <DialogTitle className="text-center text-lg font-medium">
+          Modify Habit
+        </DialogTitle>
         <form>
-          <div className="flex flex-col gap-1">
-            <Label>{name}</Label>
-            <Input type="text" placeholder="Read a book..." />
+          <div className="flex gap-1">
+            <Label>Habit:</Label>
+            <Input type="text" value={name} placeholder="Read a book..." />
           </div>
           <div className="mt-5">
             <h2 className="text-lg font-medium">Repeat</h2>
-            <div className="flex gap-2"></div>
-            <div></div>
+            <div className="flex gap-2">
+              <button
+                className={`rounded border-1 px-4 py-2 text-sm font-medium opacity-30 ${frequency === 'daily' && 'bg-red-500 text-white opacity-100'}`}
+              >
+                Daily
+              </button>
+              <button
+                className={`rounded border-1 px-4 py-2 text-sm font-medium opacity-30 ${frequency === 'weekly' && 'bg-red-500 text-white opacity-100'}`}
+              >
+                Weekly
+              </button>
+            </div>
+            <div>
+              {frequency === 'daily' ? (
+                <DaysGroup daysOfWeek={daysOfWeek} />
+              ) : (
+                <WeeklyOption />
+              )}
+            </div>
           </div>
           <div className="mt-5 w-full">
             <Button
