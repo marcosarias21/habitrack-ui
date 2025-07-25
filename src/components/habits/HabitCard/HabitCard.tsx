@@ -33,7 +33,7 @@ const HabitCard: React.FC<Prop> = ({
           <span className="text-xs text-gray-400">
             Created At: {dateToDone}
           </span>
-          {!datesDone.includes(date) && (
+          {!datesDone.includes(date as any) && (
             <Button
               className="mt-2 bg-green-500 hover:bg-green-400"
               onClick={() => onCompleteHabit?.(_id, date)}

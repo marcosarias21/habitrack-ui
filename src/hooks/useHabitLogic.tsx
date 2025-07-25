@@ -22,9 +22,13 @@ const useHabitLogic = (
       await useGetHabit(user?._id, dayIndex, fullDate)
     const doneCount = allHabitsToday - habitsNotDone.length
     const percentage = (doneCount / allHabitsToday) * 100
+    const filterHabits: Habit[] = habitsCompleted.filter((h: any) =>
+      h.datesDone.includes(fullDate),
+    )
+
     setPercentageDone(percentage)
     setHabitsData(habitsNotDone)
-    setHabitsCompleted(habitsCompleted)
+    setHabitsCompleted(filterHabits)
   }
 
   const createHabit = async (
