@@ -14,11 +14,13 @@ const HabitCard: React.FC<Prop> = ({
   name,
   createdAt,
   onCompleteHabit,
+  datesDone,
   onClick,
 }) => {
   const createdDay = new Date(createdAt)
   const d = new Date()
   const date = d.toLocaleDateString('es-ar')
+  const dateToDone = createdDay.toLocaleDateString('es-ar')
 
   return (
     <div className="flex justify-between rounded bg-[#f7f9fb] px-3 py-5">
@@ -29,14 +31,16 @@ const HabitCard: React.FC<Prop> = ({
         <div className="flex flex-col">
           <h2 className="font-medium">{name}</h2>
           <span className="text-xs text-gray-400">
-            Created At: {createdDay.toLocaleString('es-ar')}
+            Created At: {dateToDone}
           </span>
-          <Button
-            className="mt-2 bg-green-500 hover:bg-green-400"
-            onClick={() => onCompleteHabit?.(_id, date)}
-          >
-            Complete
-          </Button>
+          {!datesDone.includes(date as any) && (
+            <Button
+              className="mt-2 bg-green-500 hover:bg-green-400"
+              onClick={() => onCompleteHabit?.(_id, date)}
+            >
+              Complete
+            </Button>
+          )}
         </div>
       </div>
       <div className="flex items-center">
