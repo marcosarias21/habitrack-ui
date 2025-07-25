@@ -5,15 +5,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
+import { useModalStore } from '@/store/modalStore'
 
-const DropdownActions = () => {
+type Prop = { onClick?: () => void }
+
+const DropdownActions: React.FC<Prop> = ({ onClick }) => {
+  const { setOpen } = useModalStore()
+
+  const handleEdit = () => {
+    onClick?.()
+    setOpen(true)
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Menu size={17} color="gray" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleEdit}>
           <Edit /> Edit
         </DropdownMenuItem>
         <DropdownMenuItem>
