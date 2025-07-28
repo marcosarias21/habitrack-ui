@@ -3,6 +3,7 @@ import type { UserAuthenticated } from '@/interfaces/user/UserAuthenticated'
 import {
   completeHabit,
   useCreateHabit,
+  useEditHabit,
   useGetHabit,
 } from '@/services/habit/useHabit'
 import { useEffect, useState } from 'react'
@@ -45,6 +46,16 @@ const useHabitLogic = (
     getHabit()
   }
 
+  const editHabit = async (
+    id: string,
+    name: string,
+    days: number[],
+    frequency: string,
+  ) => {
+    const { message } = await useEditHabit(id, name, days, frequency)
+    alert(message)
+  }
+
   useEffect(() => {
     getHabit()
   }, [user, day])
@@ -55,6 +66,7 @@ const useHabitLogic = (
     onCompleteHabit,
     habitsData,
     habitsCompleted,
+    editHabit,
   }
 }
 

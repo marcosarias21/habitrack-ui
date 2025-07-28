@@ -36,3 +36,17 @@ export const completeHabit = async (id: string, date: string) => {
   })
   if (data) alert(data.message)
 }
+
+export const useEditHabit = async (
+  id: string,
+  name: string,
+  days: number[],
+  frequency: string,
+) => {
+  const { data } = await api.put(`/habit/editHabit/${id}`, {
+    name,
+    days,
+    frequency,
+  })
+  return data
+}
