@@ -3,6 +3,7 @@ import type { UserAuthenticated } from '@/interfaces/user/UserAuthenticated'
 import {
   completeHabit,
   useCreateHabit,
+  useEditHabit,
   useGetHabit,
 } from '@/services/habit/useHabit'
 import { useEffect, useState } from 'react'
@@ -25,7 +26,6 @@ const useHabitLogic = (
     const filterHabits: Habit[] = habitsCompleted.filter((h: any) =>
       h.datesDone.includes(fullDate),
     )
-
     setPercentageDone(percentage)
     setHabitsData(habitsNotDone)
     setHabitsCompleted(filterHabits)
@@ -45,9 +45,19 @@ const useHabitLogic = (
     getHabit()
   }
 
+  const editHabit = async (
+    id: string,
+    name: string,
+    days: number[],
+    frequency: string,
+  ) => {
+    const { message } = await useEditHabit(id, name, days, frequency)
+    alert(message)
+  }
+
   useEffect(() => {
     getHabit()
-  }, [user, day])
+  }, [user, day, fullDate])
   return {
     getHabit,
     percentageDone,
@@ -55,6 +65,7 @@ const useHabitLogic = (
     onCompleteHabit,
     habitsData,
     habitsCompleted,
+    editHabit,
   }
 }
 

@@ -15,13 +15,13 @@ const Dashboard = () => {
   const { user } = useGetMyUser()
   const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
   const { setHabit, habit } = useHabitStore()
-  console.log(habit)
   const {
     createHabit,
     habitsData,
     habitsCompleted,
     onCompleteHabit,
     percentageDone,
+    editHabit,
   } = useHabitLogic(user, dayIndex, fullDate, day)
 
   return (
@@ -49,13 +49,14 @@ const Dashboard = () => {
                   {...habit}
                   onCompleteHabit={onCompleteHabit}
                   onClick={() => setHabit(habit)}
+                  dateToCompare={fullDate}
                 />
               ))}
             </div>
           ) : (
             <NoPendingHabits />
           )}
-          <ModalEditHabit {...habit} />
+          <ModalEditHabit {...habit} editHabit={editHabit} />
         </div>
         <div className="rounded-lg bg-[#fff] p-4">
           <h2 className="text-lg font-bold">Habits Completed</h2>
