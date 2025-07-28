@@ -26,7 +26,6 @@ const useHabitLogic = (
     const filterHabits: Habit[] = habitsCompleted.filter((h: any) =>
       h.datesDone.includes(fullDate),
     )
-
     setPercentageDone(percentage)
     setHabitsData(habitsNotDone)
     setHabitsCompleted(filterHabits)
@@ -58,7 +57,7 @@ const useHabitLogic = (
 
   useEffect(() => {
     getHabit()
-  }, [user, day])
+  }, [user, day, fullDate])
   return {
     getHabit,
     percentageDone,

@@ -8,7 +8,7 @@ import type { Habit } from '@/interfaces/habit/Habit'
 import { useHabitStore } from '@/store/habitStore'
 import { useModalStore } from '@/store/modalStore'
 import { DialogTitle } from '@radix-ui/react-dialog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Prop extends Partial<Habit> {
   editHabit: (
@@ -27,7 +27,12 @@ const ModalEditHabit: React.FC<Prop> = ({
 }) => {
   const { open, setOpen } = useModalStore()
   const { days } = useHabitStore()
-  const [nameValue, setNameValue] = useState<string>(name ?? '')
+  const [nameValue, setNameValue] = useState<string>('')
+
+  useEffect(() => {
+    setNameValue(name ?? '')
+  }, [_id])
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
@@ -41,7 +46,6 @@ const ModalEditHabit: React.FC<Prop> = ({
               type="text"
               value={nameValue}
               onChange={({ target }) => setNameValue(target.value)}
-              placeholder="Read a book..."
             />
           </div>
           <div className="mt-5">

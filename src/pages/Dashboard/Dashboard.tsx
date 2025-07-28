@@ -15,7 +15,6 @@ const Dashboard = () => {
   const { user } = useGetMyUser()
   const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
   const { setHabit, habit } = useHabitStore()
-  console.log(habit)
   const {
     createHabit,
     habitsData,
