@@ -49,6 +49,7 @@ const Dashboard = () => {
                   {...habit}
                   onCompleteHabit={onCompleteHabit}
                   onClick={() => setHabit(habit)}
+                  dateToCompare={fullDate}
                 />
               ))}
             </div>

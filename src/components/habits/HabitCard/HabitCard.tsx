@@ -7,6 +7,7 @@ import type React from 'react'
 interface Prop extends Habit {
   onCompleteHabit?: (id: string, date: string) => void
   onClick?: () => void
+  dateToCompare?: string
 }
 
 const HabitCard: React.FC<Prop> = ({
@@ -16,6 +17,7 @@ const HabitCard: React.FC<Prop> = ({
   onCompleteHabit,
   datesDone,
   onClick,
+  dateToCompare,
 }) => {
   const createdDay = new Date(createdAt)
   const d = new Date()
@@ -33,7 +35,7 @@ const HabitCard: React.FC<Prop> = ({
           <span className="text-xs text-gray-400">
             Created At: {dateToDone}
           </span>
-          {!datesDone.includes(date as any) && (
+          {!datesDone.includes(dateToCompare as any) && (
             <Button
               className="mt-2 bg-green-500 hover:bg-green-400"
               onClick={() => onCompleteHabit?.(_id, date)}
