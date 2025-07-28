@@ -22,6 +22,7 @@ const Dashboard = () => {
     habitsCompleted,
     onCompleteHabit,
     percentageDone,
+    editHabit,
   } = useHabitLogic(user, dayIndex, fullDate, day)
 
   return (
@@ -55,7 +56,7 @@ const Dashboard = () => {
           ) : (
             <NoPendingHabits />
           )}
-          <ModalEditHabit {...habit} />
+          <ModalEditHabit {...habit} editHabit={editHabit} />
         </div>
         <div className="rounded-lg bg-[#fff] p-4">
           <h2 className="text-lg font-bold">Habits Completed</h2>

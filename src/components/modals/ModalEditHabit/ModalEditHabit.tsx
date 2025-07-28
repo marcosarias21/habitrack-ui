@@ -5,14 +5,29 @@ import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import type { Habit } from '@/interfaces/habit/Habit'
+import { useHabitStore } from '@/store/habitStore'
 import { useModalStore } from '@/store/modalStore'
 import { DialogTitle } from '@radix-ui/react-dialog'
+import { useState } from 'react'
 
-type Prop = Partial<Habit>
-
-const ModalEditHabit: React.FC<Prop> = ({ name, frequency, daysOfWeek }) => {
-  console.log(daysOfWeek)
+interface Prop extends Partial<Habit> {
+  editHabit: (
+    id: string,
+    name: string,
+    days: number[],
+    frequency: string,
+  ) => void
+}
+const ModalEditHabit: React.FC<Prop> = ({
+  _id,
+  name,
+  frequency,
+  daysOfWeek,
+  editHabit,
+}) => {
   const { open, setOpen } = useModalStore()
+  const { days } = useHabitStore()
+  const [nameValue, setNameValue] = useState<string>(name ?? '')
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
@@ -22,7 +37,12 @@ const ModalEditHabit: React.FC<Prop> = ({ name, frequency, daysOfWeek }) => {
         <form>
           <div className="flex gap-1">
             <Label>Habit:</Label>
-            <Input type="text" value={name} placeholder="Read a book..." />
+            <Input
+              type="text"
+              value={nameValue}
+              onChange={({ target }) => setNameValue(target.value)}
+              placeholder="Read a book..."
+            />
           </div>
           <div className="mt-5">
             <h2 className="text-lg font-medium">Repeat</h2>
@@ -48,6 +68,7 @@ const ModalEditHabit: React.FC<Prop> = ({ name, frequency, daysOfWeek }) => {
           </div>
           <div className="mt-5 w-full">
             <Button
+              onClick={() => editHabit(_id ?? '', nameValue, days, 'daily')}
               type="reset"
               className="w-full bg-red-500 py-5 hover:bg-red-400"
             >
