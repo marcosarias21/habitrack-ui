@@ -49,7 +49,6 @@ const Dashboard = () => {
                   {...habit}
                   onCompleteHabit={onCompleteHabit}
                   onClick={() => setHabit(habit)}
-                  dateToCompare={fullDate}
                 />
               ))}
             </div>
@@ -62,7 +61,7 @@ const Dashboard = () => {
           <h2 className="text-lg font-bold">Habits Completed</h2>
           <div className="mt-4 flex flex-col gap-5 px-10">
             {habitsCompleted.map((habit) => (
-              <HabitCard key={habit._id} {...habit} />
+              <HabitCard key={habit._id} {...habit} dateToCompare={fullDate} />
             ))}
           </div>
         </div>
