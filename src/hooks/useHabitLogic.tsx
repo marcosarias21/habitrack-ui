@@ -35,8 +35,9 @@ const useHabitLogic = (
     name: string,
     frequency: string,
     days: number[],
+    area: string,
   ) => {
-    await useCreateHabit(user?._id, name, frequency, days)
+    await useCreateHabit(user?._id, name, frequency, days, area)
     getHabit()
   }
 

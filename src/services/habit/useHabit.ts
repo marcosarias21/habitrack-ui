@@ -5,12 +5,14 @@ export const useCreateHabit = async (
   name: string,
   frequency: string,
   days: number[],
+  area: string,
 ) => {
   const { data } = await api.post('/habit/createHabit', {
     idUser,
     name,
     frequency,
     daysOfWeek: days,
+    area,
   })
   alert(data.message)
 }

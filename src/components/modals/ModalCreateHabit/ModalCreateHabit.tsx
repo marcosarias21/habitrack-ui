@@ -15,18 +15,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { areas } from '@/data/areas'
 
 interface Prop {
-  createHabit: (name: string, frequency: string, days: number[]) => void
+  createHabit: (
+    name: string,
+    frequency: string,
+    days: number[],
+    area: string,
+  ) => void
 }
 
 const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
   const [isSelected, setIsSelected] = useState<string>('daily')
   const { days } = useHabitStore()
   const [name, setName] = useState<string>('')
+  const [area, setArea] = useState<string>('')
 
   const onSubmit = () => {
-    createHabit(name, isSelected, days)
+    createHabit(name, isSelected, days, area)
   }
 
   return (
@@ -70,18 +77,18 @@ const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
           <div className="mt-2">
             <h2 className="text-lg font-bold">Areas</h2>
             <div>
-              <Select>
+              <Select onValueChange={(value) => setArea(value)}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select Area" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent onChange={({ target }) => console.log(target)}>
                   <SelectGroup>
                     <SelectLabel>Areas</SelectLabel>
-                    <SelectItem value="health">Health</SelectItem>
-                    <SelectItem value="wellbeing">Well Being</SelectItem>
-                    <SelectItem value="sleep">Sleep</SelectItem>
-                    <SelectItem value="hydratation">Hydration</SelectItem>
-                    <SelectItem value="learning">Learning</SelectItem>
+                    {areas.map((area) => (
+                      <SelectItem value={area.value}>
+                        {area.icon} {area.name}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
