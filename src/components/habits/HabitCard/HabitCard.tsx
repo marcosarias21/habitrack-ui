@@ -1,8 +1,8 @@
 import { DropdownActions } from '@/components/DropdownActions'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { areas } from '@/data/areas'
 import type { Habit } from '@/interfaces/habit/Habit'
-import { Book } from 'lucide-react'
 import type React from 'react'
 
 interface Prop extends Habit {
@@ -14,6 +14,7 @@ interface Prop extends Habit {
 const HabitCard: React.FC<Prop> = ({
   _id,
   name,
+  area,
   createdAt,
   onCompleteHabit,
   datesDone,
@@ -26,12 +27,13 @@ const HabitCard: React.FC<Prop> = ({
   const dateToDone = createdDay.toLocaleDateString('es-ar')
   const isToday = date == dateToCompare
   const isCompleted = datesDone.includes(dateToCompare ?? '')
+  const iconHabit = areas.find((a) => a.value == area)
 
   return (
     <div className="flex justify-between rounded bg-[#f7f9fb] px-3 py-5">
       <div className="flex gap-1">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-400">
-          <Book className="text-gray-100" size={20} />
+          <span className="text-gray-100">{iconHabit?.icon}</span>
         </div>
         <div className="flex flex-col">
           <h2 className="font-medium">{name}</h2>
