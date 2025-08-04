@@ -1,4 +1,5 @@
 import { DropdownActions } from '@/components/DropdownActions'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import type { Habit } from '@/interfaces/habit/Habit'
 import { Book } from 'lucide-react'
@@ -23,6 +24,7 @@ const HabitCard: React.FC<Prop> = ({
   const d = new Date()
   const date = d.toLocaleDateString('es-ar')
   const dateToDone = createdDay.toLocaleDateString('es-ar')
+  const isToday = date == dateToCompare
 
   return (
     <div className="flex justify-between rounded bg-[#f7f9fb] px-3 py-5">
@@ -35,13 +37,23 @@ const HabitCard: React.FC<Prop> = ({
           <span className="text-xs text-gray-400">
             Created At: {dateToDone}
           </span>
-          {!datesDone.includes(dateToCompare as any) && (
-            <Button
-              className="mt-2 bg-green-500 hover:bg-green-400"
-              onClick={() => onCompleteHabit?.(_id, date)}
-            >
-              Complete
-            </Button>
+          {isToday ? (
+            !datesDone.includes(dateToCompare as any) ? (
+              <Button
+                className="mt-2 bg-green-500 hover:bg-green-400"
+                onClick={() => onCompleteHabit?.(_id, date)}
+              >
+                Complete
+              </Button>
+            ) : (
+              <Badge className="bg-green-400">Completado</Badge>
+            )
+          ) : !datesDone.includes(dateToCompare as any) ? (
+            <Badge className="bg-gray-400">
+              <span className="font-bold">Not completed on day</span>
+            </Badge>
+          ) : (
+            <Badge className="bg-green-400">Completado</Badge>
           )}
         </div>
       </div>
