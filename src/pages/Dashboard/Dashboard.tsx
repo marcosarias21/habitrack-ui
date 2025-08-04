@@ -33,6 +33,7 @@ const Dashboard = () => {
       setDay(getDayDifference(new Date(), dateCalendar))
     }
   }, [dateCalendar])
+
   return (
     <section className="grid h-dvh grid-cols-12 gap-4">
       <Sidebar />
@@ -78,13 +79,15 @@ const Dashboard = () => {
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
         <StatisticsHabit percentageDone={percentageDone} />
-        <Calendar
-          mode="single"
-          selected={dateCalendar}
-          onSelect={setDateCalendar}
-          className="rounded-md"
-          captionLayout="dropdown"
-        />
+        <div className="mt-10 rounded bg-[#f7f9fb] p-5">
+          <Calendar
+            mode="single"
+            selected={dateCalendar}
+            onSelect={setDateCalendar}
+            className="w-full rounded-md"
+            captionLayout="dropdown"
+          />
+        </div>
       </section>
     </section>
   )
