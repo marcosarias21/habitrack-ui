@@ -81,7 +81,7 @@ const ModalCreateHabit: React.FC<Prop> = ({ createHabit }) => {
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select Area" />
                 </SelectTrigger>
-                <SelectContent onChange={({ target }) => console.log(target)}>
+                <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Areas</SelectLabel>
                     {areas.map((area) => (

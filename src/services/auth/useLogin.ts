@@ -9,6 +9,5 @@ export const login = async (e: z.infer<typeof loginFormSchema>) => {
 
 export const getMyUser = async () => {
   const { data } = await api.post('/auth/me')
-  console.log(data)
   return data
 }
