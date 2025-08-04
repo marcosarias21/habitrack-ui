@@ -6,14 +6,21 @@ import { Header } from '@/components/Header'
 import { ModalCreateHabit } from '@/components/modals/ModalCreateHabit'
 import { ModalEditHabit } from '@/components/modals/ModalEditHabit'
 import { Sidebar } from '@/components/Sidebar'
+import { Calendar } from '@/components/ui/calendar'
 import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useHabitLogic from '@/hooks/useHabitLogic'
 import { useHabitStore } from '@/store/habitStore'
+import { useEffect, useState } from 'react'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
-  const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
+  const { fullDate, dayIndex, dayName, setDay, day, setFullDate, date } =
+    useDataDay()
+  console.log(fullDate)
+  const [dateCalendar, setDateCalendar] = useState<Date | undefined>(new Date())
+  console.log(dateCalendar?.toLocaleDateString('es-ar'))
+
   const { setHabit, habit } = useHabitStore()
   const {
     createHabit,
@@ -24,6 +31,20 @@ const Dashboard = () => {
     editHabit,
   } = useHabitLogic(user, dayIndex, fullDate, day)
 
+  useEffect(() => {
+    if (dateCalendar) {
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+
+      const selected = new Date(dateCalendar)
+      selected.setHours(0, 0, 0, 0)
+
+      const diffInMs = selected.getTime() - today.getTime()
+      const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
+
+      setDay(diffInDays)
+    }
+  }, [dateCalendar])
   return (
     <section className="grid h-dvh grid-cols-12 gap-4">
       <Sidebar />
@@ -69,6 +90,13 @@ const Dashboard = () => {
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
         <StatisticsHabit percentageDone={percentageDone} />
+        <Calendar
+          mode="single"
+          selected={dateCalendar}
+          onSelect={setDateCalendar}
+          className="rounded-md"
+          captionLayout="dropdown"
+        />
       </section>
     </section>
   )
