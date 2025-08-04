@@ -3,7 +3,7 @@ export interface Habit {
   user: string
   name: string
   frequency: string
-  datesDone: Date[]
+  datesDone: string[]
   daysOfWeek: number[]
   createdAt: string
   updatedAt: string
