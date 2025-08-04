@@ -6,15 +6,17 @@ import { Header } from '@/components/Header'
 import { ModalCreateHabit } from '@/components/modals/ModalCreateHabit'
 import { ModalEditHabit } from '@/components/modals/ModalEditHabit'
 import { Sidebar } from '@/components/Sidebar'
+import { Calendar } from '@/components/ui/calendar'
 import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useHabitLogic from '@/hooks/useHabitLogic'
 import { useHabitStore } from '@/store/habitStore'
+import { getDayDifference } from '@/utils/dateUtils'
+import { useEffect, useState } from 'react'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
-  const { setHabit, habit } = useHabitStore()
   const {
     createHabit,
     habitsData,
@@ -23,6 +25,14 @@ const Dashboard = () => {
     percentageDone,
     editHabit,
   } = useHabitLogic(user, dayIndex, fullDate, day)
+  const { setHabit, habit } = useHabitStore()
+  const [dateCalendar, setDateCalendar] = useState<Date | undefined>(new Date())
+
+  useEffect(() => {
+    if (dateCalendar) {
+      setDay(getDayDifference(new Date(), dateCalendar))
+    }
+  }, [dateCalendar])
 
   return (
     <section className="grid h-dvh grid-cols-12 gap-4">
@@ -69,6 +79,15 @@ const Dashboard = () => {
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
         <StatisticsHabit percentageDone={percentageDone} />
+        <div className="mt-10 rounded bg-[#f7f9fb] p-5">
+          <Calendar
+            mode="single"
+            selected={dateCalendar}
+            onSelect={setDateCalendar}
+            className="w-full rounded-md"
+            captionLayout="dropdown"
+          />
+        </div>
       </section>
     </section>
   )
