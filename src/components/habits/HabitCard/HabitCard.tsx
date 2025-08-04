@@ -25,6 +25,7 @@ const HabitCard: React.FC<Prop> = ({
   const date = d.toLocaleDateString('es-ar')
   const dateToDone = createdDay.toLocaleDateString('es-ar')
   const isToday = date == dateToCompare
+  const isCompleted = datesDone.includes(dateToCompare ?? '')
 
   return (
     <div className="flex justify-between rounded bg-[#f7f9fb] px-3 py-5">
@@ -38,7 +39,7 @@ const HabitCard: React.FC<Prop> = ({
             Created At: {dateToDone}
           </span>
           {isToday ? (
-            !datesDone.includes(dateToCompare as any) ? (
+            !isCompleted ? (
               <Button
                 className="mt-2 bg-green-500 hover:bg-green-400"
                 onClick={() => onCompleteHabit?.(_id, date)}
@@ -48,7 +49,7 @@ const HabitCard: React.FC<Prop> = ({
             ) : (
               <Badge className="bg-green-400">Completado</Badge>
             )
-          ) : !datesDone.includes(dateToCompare as any) ? (
+          ) : !isCompleted ? (
             <Badge className="bg-gray-400">
               <span className="font-bold">Not completed on day</span>
             </Badge>
