@@ -15,8 +15,7 @@ import { useEffect, useState } from 'react'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
-  const { fullDate, dayIndex, dayName, setDay, day, setFullDate, date } =
-    useDataDay()
+  const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
   console.log(fullDate)
   const [dateCalendar, setDateCalendar] = useState<Date | undefined>(new Date())
   console.log(dateCalendar?.toLocaleDateString('es-ar'))
