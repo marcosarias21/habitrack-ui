@@ -11,16 +11,12 @@ import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useHabitLogic from '@/hooks/useHabitLogic'
 import { useHabitStore } from '@/store/habitStore'
+import { getDayDifference } from '@/utils/dateUtils'
 import { useEffect, useState } from 'react'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
-  console.log(fullDate)
-  const [dateCalendar, setDateCalendar] = useState<Date | undefined>(new Date())
-  console.log(dateCalendar?.toLocaleDateString('es-ar'))
-
-  const { setHabit, habit } = useHabitStore()
   const {
     createHabit,
     habitsData,
@@ -29,19 +25,12 @@ const Dashboard = () => {
     percentageDone,
     editHabit,
   } = useHabitLogic(user, dayIndex, fullDate, day)
+  const { setHabit, habit } = useHabitStore()
+  const [dateCalendar, setDateCalendar] = useState<Date | undefined>(new Date())
 
   useEffect(() => {
     if (dateCalendar) {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-
-      const selected = new Date(dateCalendar)
-      selected.setHours(0, 0, 0, 0)
-
-      const diffInMs = selected.getTime() - today.getTime()
-      const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
-
-      setDay(diffInDays)
+      setDay(getDayDifference(new Date(), dateCalendar))
     }
   }, [dateCalendar])
   return (
