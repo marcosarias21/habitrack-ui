@@ -14,7 +14,6 @@ import { useHabitStore } from '@/store/habitStore'
 const Dashboard = () => {
   const { user } = useGetMyUser()
   const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
-  console.log(fullDate)
   const { setHabit, habit } = useHabitStore()
   const {
     createHabit,
