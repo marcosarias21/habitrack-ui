@@ -1,3 +1,4 @@
+import { CalendarSection } from '@/components/CalendarSection'
 import { DateSection } from '@/components/habits/DateSection'
 import { HabitCard } from '@/components/habits/HabitCard'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
@@ -6,7 +7,6 @@ import { Header } from '@/components/Header'
 import { ModalCreateHabit } from '@/components/modals/ModalCreateHabit'
 import { ModalEditHabit } from '@/components/modals/ModalEditHabit'
 import { Sidebar } from '@/components/Sidebar'
-import { Calendar } from '@/components/ui/calendar'
 import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useHabitLogic from '@/hooks/useHabitLogic'
@@ -79,15 +79,12 @@ const Dashboard = () => {
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
         <StatisticsHabit percentageDone={percentageDone} />
-        <div className="mt-10 rounded bg-[#f7f9fb] p-5">
-          <Calendar
-            mode="single"
-            selected={dateCalendar}
-            onSelect={setDateCalendar}
-            className="w-full rounded-md"
-            captionLayout="dropdown"
+        {dateCalendar && (
+          <CalendarSection
+            dateCalendar={dateCalendar}
+            setDateCalendar={setDateCalendar}
           />
-        </div>
+        )}
       </section>
     </section>
   )
