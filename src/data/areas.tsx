@@ -1,6 +1,7 @@
+import type { Area } from '@/interfaces/habit/Habit'
 import { Activity, Bed, Book, GlassWater, ScanHeart } from 'lucide-react'
 
-export const areas = [
+export const areas: Area[] = [
   {
     name: 'Health',
     value: 'health',
