@@ -1,4 +1,5 @@
 import { CalendarSection } from '@/components/CalendarSection'
+import { FilterArea } from '@/components/FilterArea'
 import { DateSection } from '@/components/habits/DateSection'
 import { HabitCard } from '@/components/habits/HabitCard'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
@@ -7,6 +8,7 @@ import { Header } from '@/components/Header'
 import { ModalCreateHabit } from '@/components/modals/ModalCreateHabit'
 import { ModalEditHabit } from '@/components/modals/ModalEditHabit'
 import { Sidebar } from '@/components/Sidebar'
+import { areas } from '@/data/areas'
 import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useHabitLogic from '@/hooks/useHabitLogic'
@@ -39,6 +41,7 @@ const Dashboard = () => {
       <Sidebar />
       <section className="col-span-7 flex w-full flex-col gap-7">
         {user && <Header {...user} />}
+        <FilterArea areas={areas} />
         <div className="rounded-lg bg-[#FEFEFE] p-4">
           <div className="flex h-fit w-full justify-between">
             <div className="flex w-full justify-between">

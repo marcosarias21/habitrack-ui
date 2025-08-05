@@ -10,3 +10,9 @@ export interface Habit {
   updatedAt: string
   __v: number
 }
+
+export interface Area {
+  name: string
+  value: string
+  icon: React.ReactNode
+}
