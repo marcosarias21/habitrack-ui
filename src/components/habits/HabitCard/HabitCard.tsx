@@ -25,7 +25,7 @@ const HabitCard: React.FC<Prop> = ({
   const d = new Date()
   const date = d.toLocaleDateString('es-ar')
   const dateToDone = createdDay.toLocaleDateString('es-ar')
-  const isToday = date == dateToCompare
+  const isToday = dateToCompare && date <= dateToCompare
   const isCompleted = datesDone.includes(dateToCompare ?? '')
   const iconHabit = areas.find((a) => a.value == area)
 
