@@ -13,7 +13,7 @@ const FilterArea: React.FC<Prop> = ({ areas }) => {
         <Button
           variant={'outline'}
           onClick={() => setFilter('')}
-          className={`${filter === 'all' && 'bg-blue-500'}`}
+          className={`${filter === '' && '!bg-blue-500 !text-gray-100'}`}
         >
           <Globe />
           All
@@ -21,7 +21,7 @@ const FilterArea: React.FC<Prop> = ({ areas }) => {
         {areas.map((area) => (
           <Button
             variant={'outline'}
-            className={`${filter === area.value && 'bg-blue-500'}`}
+            className={`${filter === area.value && '!bg-blue-500 !text-gray-100'}`}
             onClick={() => setFilter(area.value)}
           >
             {area.icon}
