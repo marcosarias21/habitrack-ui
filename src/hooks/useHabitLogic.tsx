@@ -19,7 +19,6 @@ const useHabitLogic = (
   const [habitsData, setHabitsData] = useState<Habit[]>([])
   const [habitsCompleted, setHabitsCompleted] = useState<Habit[]>([])
   const { filter } = useFilterStore()
-  console.log(filter)
 
   const getHabit = async () => {
     const { habitsNotDone, allHabitsToday, habitsCompleted } =
