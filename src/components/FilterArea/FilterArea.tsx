@@ -12,7 +12,7 @@ const FilterArea: React.FC<Prop> = ({ areas }) => {
       <div className="flex gap-4">
         <Button
           variant={'outline'}
-          onClick={() => setFilter('all')}
+          onClick={() => setFilter('')}
           className={`${filter === 'all' && 'bg-blue-500'}`}
         >
           <Globe />
