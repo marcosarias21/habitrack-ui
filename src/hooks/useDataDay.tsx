@@ -14,6 +14,7 @@ const useDataDay = () => {
     fullDate,
     dayIndex,
     dayName,
+    date,
   }
 }
 
