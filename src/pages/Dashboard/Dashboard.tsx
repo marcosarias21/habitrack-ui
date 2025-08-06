@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
-  const { fullDate, dayIndex, dayName, setDay, day } = useDataDay()
+  const { fullDate, dayIndex, dayName, setDay, day, date } = useDataDay()
   const {
     createHabit,
     habitsData,
@@ -63,6 +63,7 @@ const Dashboard = () => {
                   onCompleteHabit={onCompleteHabit}
                   onClick={() => setHabit(habit)}
                   dateToCompare={fullDate}
+                  dateNextOrPrevious={date}
                 />
               ))}
             </div>

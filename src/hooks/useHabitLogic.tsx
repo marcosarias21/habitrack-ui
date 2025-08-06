@@ -6,6 +6,7 @@ import {
   useEditHabit,
   useGetHabit,
 } from '@/services/habit/useHabit'
+import { useFilterStore } from '@/store/filterStore'
 import { useEffect, useState } from 'react'
 
 const useHabitLogic = (
@@ -17,10 +18,11 @@ const useHabitLogic = (
   const [percentageDone, setPercentageDone] = useState<number>(0)
   const [habitsData, setHabitsData] = useState<Habit[]>([])
   const [habitsCompleted, setHabitsCompleted] = useState<Habit[]>([])
+  const { filter } = useFilterStore()
 
   const getHabit = async () => {
     const { habitsNotDone, allHabitsToday, habitsCompleted } =
-      await useGetHabit(user?._id, dayIndex, fullDate)
+      await useGetHabit(user?._id, dayIndex, fullDate, filter)
     const doneCount = allHabitsToday - habitsNotDone.length
     const percentage = (doneCount / allHabitsToday) * 100
     const filterHabits: Habit[] = habitsCompleted.filter((h: any) =>
@@ -58,7 +60,7 @@ const useHabitLogic = (
 
   useEffect(() => {
     getHabit()
-  }, [user, day, fullDate])
+  }, [user, day, fullDate, filter])
   return {
     getHabit,
     percentageDone,

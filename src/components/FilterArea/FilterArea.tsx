@@ -1,19 +1,19 @@
 import type { Area } from '@/interfaces/habit/Habit'
 import { Button } from '../ui/button'
-import { useState } from 'react'
 import { Globe } from 'lucide-react'
+import { useFilterStore } from '@/store/filterStore'
 
 type Prop = { areas: Area[] }
 
 const FilterArea: React.FC<Prop> = ({ areas }) => {
-  const [selectedArea, setSelectedArea] = useState<string>('')
+  const { setFilter, filter } = useFilterStore()
   return (
     <div className="rounded-lg bg-[#FEFEFE] p-4">
       <div className="flex gap-4">
         <Button
           variant={'outline'}
-          onClick={() => setSelectedArea('all')}
-          className={`${selectedArea === 'all' && 'bg-blue-500'}`}
+          onClick={() => setFilter('')}
+          className={`${filter === '' && '!bg-blue-500 !text-gray-100'}`}
         >
           <Globe />
           All
@@ -21,8 +21,8 @@ const FilterArea: React.FC<Prop> = ({ areas }) => {
         {areas.map((area) => (
           <Button
             variant={'outline'}
-            className={`${selectedArea === area.value && 'bg-blue-500'}`}
-            onClick={() => setSelectedArea(area.value)}
+            className={`${filter === area.value && '!bg-blue-500 !text-gray-100'}`}
+            onClick={() => setFilter(area.value)}
           >
             {area.icon}
             {area.name}
