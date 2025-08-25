@@ -50,6 +50,6 @@ export const daysToGroup = [
   },
   {
     day: 'Su',
-    numberDay: 7,
+    numberDay: 0,
   },
 ]

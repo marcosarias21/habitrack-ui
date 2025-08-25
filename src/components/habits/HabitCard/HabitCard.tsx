@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { areas } from '@/data/areas'
 import type { Habit } from '@/interfaces/habit/Habit'
-import { getDayOfYear } from 'date-fns'
+import { getDayOfYear, verifyIsToday } from '@/utils/dateUtils'
 import type React from 'react'
 
 interface Prop extends Habit {
@@ -24,11 +24,12 @@ const HabitCard: React.FC<Prop> = ({
   dateToCompare,
   dateNextOrPrevious,
 }) => {
+  console.log(dateNextOrPrevious)
   const createdDay = new Date(createdAt)
   const d = new Date()
   const date = d.toLocaleDateString('es-ar')
   const dateToDone = createdDay.toLocaleDateString('es-ar')
-  const isToday = getDayOfYear(d) <= getDayOfYear(dateNextOrPrevious ?? '')
+  const day = verifyIsToday(getDayOfYear(dateNextOrPrevious as Date) as number)
   const isCompleted = datesDone.includes(dateToCompare ?? '')
   const iconHabit = areas.find((a) => a.value == area)
 
@@ -43,23 +44,23 @@ const HabitCard: React.FC<Prop> = ({
           <span className="text-xs text-gray-400">
             Created At: {dateToDone}
           </span>
-          {isToday ? (
-            !isCompleted ? (
-              <Button
-                className="mt-2 bg-green-500 hover:bg-green-400"
-                onClick={() => onCompleteHabit?.(_id, date)}
-              >
-                Complete
-              </Button>
-            ) : (
-              <Badge className="bg-green-400">Completado</Badge>
-            )
-          ) : !isCompleted ? (
-            <Badge className="bg-gray-400">
-              <span className="font-bold">Not completed on day</span>
-            </Badge>
+          {day === 'today'
+            ? !isCompleted && (
+                <Button
+                  className="mt-2 bg-green-500 hover:bg-green-400"
+                  onClick={() => onCompleteHabit?.(_id, date)}
+                >
+                  Complete
+                </Button>
+              )
+            : isCompleted && <Badge className="bg-green-400">Completado</Badge>}
+          {day == 'next' && (
+            <Button className="mt-2 bg-gray-500">Blocked</Button>
+          )}
+          {day === 'previous' && !isCompleted ? (
+            <Badge className="bg-gray-400">Not completed on day</Badge>
           ) : (
-            <Badge className="bg-green-400">Completado</Badge>
+            isCompleted && <Button>Completed</Button>
           )}
         </div>
       </div>
