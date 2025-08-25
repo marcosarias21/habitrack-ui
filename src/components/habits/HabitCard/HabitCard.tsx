@@ -60,7 +60,7 @@ const HabitCard: React.FC<Prop> = ({
           {day === 'previous' && !isCompleted ? (
             <Badge className="bg-gray-400">Not completed on day</Badge>
           ) : (
-            isCompleted && <Button>Completed</Button>
+            day === 'previous' && isCompleted && <Button>Completed</Button>
           )}
         </div>
       </div>
