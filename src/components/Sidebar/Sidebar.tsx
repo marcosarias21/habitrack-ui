@@ -4,7 +4,7 @@ import { Folder, LogOut } from 'lucide-react'
 const Sidebar = () => {
   const { pathname } = useLocation()
   return (
-    <div className="col-span-2 flex flex-col items-center justify-between bg-[#fff]">
+    <div className="z-99 col-span-2 flex flex-col items-center justify-between bg-[#fff]">
       <div className="mt-5">
         <h3 className="text-2xl font-bold tracking-wider">
           <span className="ml-0.5 rounded-sm bg-blue-400 p-1 px-2 leading-none font-medium text-white">

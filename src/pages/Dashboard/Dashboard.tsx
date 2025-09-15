@@ -1,6 +1,7 @@
 import { CalendarSection } from '@/components/CalendarSection'
 import { FilterArea } from '@/components/FilterArea'
 import { DateSection } from '@/components/habits/DateSection'
+import { EmptyHabitsMessage } from '@/components/habits/EmptyHabitsMessage'
 import { HabitCard } from '@/components/habits/HabitCard'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { StatisticsHabit } from '@/components/habits/StatisticsHabit'
@@ -75,9 +76,17 @@ const Dashboard = () => {
         <div className="rounded-lg bg-[#fff] p-4">
           <h2 className="text-lg font-bold">Habits Completed</h2>
           <div className="mt-4 flex flex-col gap-5 px-10">
-            {habitsCompleted.map((habit) => (
-              <HabitCard key={habit._id} {...habit} dateToCompare={fullDate} />
-            ))}
+            {habitsCompleted.length > 0 ? (
+              habitsCompleted.map((habit) => (
+                <HabitCard
+                  key={habit._id}
+                  {...habit}
+                  dateToCompare={fullDate}
+                />
+              ))
+            ) : (
+              <EmptyHabitsMessage />
+            )}
           </div>
         </div>
       </section>
