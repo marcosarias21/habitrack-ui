@@ -6,6 +6,7 @@ import { HabitCard } from '@/components/habits/HabitCard'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { StatisticsHabit } from '@/components/habits/StatisticsHabit'
 import { Header } from '@/components/Header'
+import { Container } from '@/components/layout/Container'
 import { ModalCreateHabit } from '@/components/modals/ModalCreateHabit'
 import { ModalEditHabit } from '@/components/modals/ModalEditHabit'
 import { Sidebar } from '@/components/Sidebar'
@@ -38,7 +39,7 @@ const Dashboard = () => {
   }, [dateCalendar])
 
   return (
-    <section className="grid h-dvh grid-cols-12 gap-4">
+    <Container>
       <Sidebar />
       <section className="col-span-7 flex w-full flex-col gap-7">
         {user && <Header {...user} />}
@@ -99,7 +100,7 @@ const Dashboard = () => {
           />
         )}
       </section>
-    </section>
+    </Container>
   )
 }
 
