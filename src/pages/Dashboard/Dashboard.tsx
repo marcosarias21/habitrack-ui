@@ -6,6 +6,7 @@ import { HabitCard } from '@/components/habits/HabitCard'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { StatisticsHabit } from '@/components/habits/StatisticsHabit'
 import { Header } from '@/components/Header'
+import { BackgroundContainer } from '@/components/layout/BackgroundContainer'
 import { Container } from '@/components/layout/Container'
 import { ModalCreateHabit } from '@/components/modals/ModalCreateHabit'
 import { ModalEditHabit } from '@/components/modals/ModalEditHabit'
@@ -44,7 +45,7 @@ const Dashboard = () => {
       <section className="col-span-7 flex w-full flex-col gap-7">
         {user && <Header {...user} />}
         <FilterArea areas={areas} />
-        <div className="rounded-lg bg-[#FEFEFE] p-4">
+        <BackgroundContainer>
           <div className="flex h-fit w-full justify-between">
             <div className="flex w-full justify-between">
               <DateSection
@@ -73,8 +74,8 @@ const Dashboard = () => {
             <NoPendingHabits />
           )}
           <ModalEditHabit {...habit} editHabit={editHabit} />
-        </div>
-        <div className="rounded-lg bg-[#fff] p-4">
+        </BackgroundContainer>
+        <BackgroundContainer>
           <h2 className="text-lg font-bold">Habits Completed</h2>
           <div className="mt-4 flex flex-col gap-5 px-10">
             {habitsCompleted.length > 0 ? (
@@ -89,7 +90,7 @@ const Dashboard = () => {
               <EmptyHabitsMessage />
             )}
           </div>
-        </div>
+        </BackgroundContainer>
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
         <StatisticsHabit percentageDone={percentageDone} />
