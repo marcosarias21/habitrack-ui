@@ -1,7 +1,7 @@
-import { Header } from '@/components/Header'
 import { BackgroundContainer } from '@/components/layout/BackgroundContainer'
 import { Container } from '@/components/layout/Container'
-import { Sidebar } from '@/components/Sidebar'
+import { Header } from '@/components/layout/Header'
+import { Sidebar } from '@/components/layout/Sidebar'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useStatistics from '@/hooks/useStatistics'
 
