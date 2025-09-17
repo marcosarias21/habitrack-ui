@@ -1,5 +1,5 @@
+import { Button } from '@/components/ui/button'
 import type { UserAuthenticated } from '@/interfaces/user/UserAuthenticated'
-import { Button } from '../ui/button'
 import { Search } from 'lucide-react'
 
 const Header = ({ email }: UserAuthenticated) => {

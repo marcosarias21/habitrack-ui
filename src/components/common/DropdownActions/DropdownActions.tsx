@@ -1,11 +1,12 @@
 import { Edit, Menu, Trash } from 'lucide-react'
+
+import { useModalStore } from '@/store/modalStore'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
-import { useModalStore } from '@/store/modalStore'
+} from '@/components/ui/dropdown-menu'
 
 type Prop = { onClick?: () => void }
 
