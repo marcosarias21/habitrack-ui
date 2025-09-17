@@ -1,7 +1,7 @@
 import type { Area } from '@/interfaces/habit/Habit'
-import { Button } from '../ui/button'
 import { Globe } from 'lucide-react'
 import { useFilterStore } from '@/store/filterStore'
+import { Button } from '@/components/ui/button'
 
 type Prop = { areas: Area[] }
 

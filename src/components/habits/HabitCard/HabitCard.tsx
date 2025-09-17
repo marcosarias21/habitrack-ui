@@ -1,4 +1,4 @@
-import { DropdownActions } from '@/components/DropdownActions'
+import { DropdownActions } from '@/components/common/DropdownActions'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { areas } from '@/data/areas'

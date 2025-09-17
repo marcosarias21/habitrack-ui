@@ -1,14 +1,13 @@
-import { CalendarSection } from '@/components/CalendarSection'
-import { FilterArea } from '@/components/FilterArea'
 import { DateSection } from '@/components/habits/DateSection'
 import { EmptyHabitsMessage } from '@/components/habits/EmptyHabitsMessage'
 import { HabitCard } from '@/components/habits/HabitCard'
 import { NoPendingHabits } from '@/components/habits/NoPendingHabits'
 import { StatisticsHabit } from '@/components/habits/StatisticsHabit'
-import { Header } from '@/components/Header'
+import { BackgroundContainer } from '@/components/layout/BackgroundContainer'
+import { Container } from '@/components/layout/Container'
 import { ModalCreateHabit } from '@/components/modals/ModalCreateHabit'
 import { ModalEditHabit } from '@/components/modals/ModalEditHabit'
-import { Sidebar } from '@/components/Sidebar'
+import { Sidebar } from '@/components/layout/Sidebar'
 import { areas } from '@/data/areas'
 import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
@@ -16,6 +15,9 @@ import useHabitLogic from '@/hooks/useHabitLogic'
 import { useHabitStore } from '@/store/habitStore'
 import { getDayDifference } from '@/utils/dateUtils'
 import { useEffect, useState } from 'react'
+import { Header } from '@/components/layout/Header'
+import { FilterArea } from '@/components/common/FilterArea'
+import { CalendarSection } from '@/components/common/CalendarSection'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
@@ -38,12 +40,12 @@ const Dashboard = () => {
   }, [dateCalendar])
 
   return (
-    <section className="grid h-dvh grid-cols-12 gap-4">
+    <Container>
       <Sidebar />
       <section className="col-span-7 flex w-full flex-col gap-7">
         {user && <Header {...user} />}
         <FilterArea areas={areas} />
-        <div className="rounded-lg bg-[#FEFEFE] p-4">
+        <BackgroundContainer>
           <div className="flex h-fit w-full justify-between">
             <div className="flex w-full justify-between">
               <DateSection
@@ -72,8 +74,8 @@ const Dashboard = () => {
             <NoPendingHabits />
           )}
           <ModalEditHabit {...habit} editHabit={editHabit} />
-        </div>
-        <div className="rounded-lg bg-[#fff] p-4">
+        </BackgroundContainer>
+        <BackgroundContainer>
           <h2 className="text-lg font-bold">Habits Completed</h2>
           <div className="mt-4 flex flex-col gap-5 px-10">
             {habitsCompleted.length > 0 ? (
@@ -88,7 +90,7 @@ const Dashboard = () => {
               <EmptyHabitsMessage />
             )}
           </div>
-        </div>
+        </BackgroundContainer>
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
         <StatisticsHabit percentageDone={percentageDone} />
@@ -99,7 +101,7 @@ const Dashboard = () => {
           />
         )}
       </section>
-    </section>
+    </Container>
   )
 }
 

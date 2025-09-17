@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { Folder, LogOut } from 'lucide-react'
 const Sidebar = () => {
   const { pathname } = useLocation()
@@ -18,12 +18,13 @@ const Sidebar = () => {
           className={`flex w-40 gap-2 rounded px-2 py-2 text-center font-medium tracking-wide text-gray-500 transition-colors hover:bg-blue-400 hover:text-white ${pathname == '/dashboard' && 'bg-blue-400 text-white'}`}
         >
           <Folder />
-          <Link to="">All Habits</Link>
+          <Link to="/dashboard">All Habits</Link>
         </div>
-        <div className="flex w-40 gap-2 rounded px-2 py-2 text-center font-medium tracking-wide text-gray-500 transition-colors hover:bg-blue-400 hover:text-white">
+        <div
+          className={`flex w-40 gap-2 rounded px-2 py-2 text-center font-medium tracking-wide text-gray-500 transition-colors hover:bg-blue-400 hover:text-white ${pathname == '/statistics' && 'bg-blue-400 text-white'}`}
+        >
           <Folder />
-
-          <Link to="">Stadistics</Link>
+          <Link to="/statistics">Stadistics</Link>
         </div>
       </div>
       <div className="mb-5 w-full">

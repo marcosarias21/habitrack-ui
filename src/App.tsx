@@ -3,6 +3,7 @@ import { Login } from './pages/Login'
 import { useEffect } from 'react'
 import { useAuthStore } from './store/authStore'
 import { Dashboard } from './pages/Dashboard'
+import { Statistics } from './pages/Statistics'
 import './App.css'
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
     <Routes>
       <Route path="/auth" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/statistics" element={<Statistics />} />
     </Routes>
   )
 }
