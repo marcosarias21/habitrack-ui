@@ -5,11 +5,13 @@ import { Sidebar } from '@/components/layout/Sidebar'
 import { StatCard } from '@/components/statistics/StatCard'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useStatistics from '@/hooks/useStatistics'
-import { Grid, Smile } from 'lucide-react'
+import { Construction, Grid, Smile } from 'lucide-react'
 
 const Statistics = () => {
   const { user } = useGetMyUser()
-  const { totalHabits, perfectDaysCount } = useStatistics(user?._id ?? '')
+  const { totalHabits, perfectDaysCount, averageDaily } = useStatistics(
+    user?._id ?? '',
+  )
   return (
     <Container>
       <Sidebar />
@@ -26,6 +28,11 @@ const Statistics = () => {
               data={perfectDaysCount}
               title="Perfect Days"
               icon={<Grid className="mb-2 text-red-500" size={19} />}
+            />
+            <StatCard
+              data={averageDaily?.toFixed(2) ?? ''}
+              title="Average per daily"
+              icon={<Construction className="mb-2 text-red-500" size={19} />}
             />
           </div>
         </BackgroundContainer>

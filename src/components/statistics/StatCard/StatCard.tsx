@@ -1,4 +1,3 @@
-import { Smile } from 'lucide-react'
 import React from 'react'
 
 interface Prop {
