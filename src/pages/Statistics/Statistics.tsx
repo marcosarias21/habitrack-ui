@@ -2,6 +2,7 @@ import { BackgroundContainer } from '@/components/layout/BackgroundContainer'
 import { Container } from '@/components/layout/Container'
 import { Header } from '@/components/layout/Header'
 import { Sidebar } from '@/components/layout/Sidebar'
+import { HeaderStatistic } from '@/components/statistics/HeaderStatistic'
 import { HeatMap } from '@/components/statistics/HeatMap'
 import { StatCard } from '@/components/statistics/StatCard'
 import useGetMyUser from '@/hooks/useGetMyUser'
@@ -39,8 +40,11 @@ const Statistics = () => {
         </BackgroundContainer>
         {allHabits.map((habit) => (
           <BackgroundContainer>
-            <div className="flex justify-center">
-              <HeatMap datesDone={habit.datesDone} />
+            <div className="flex flex-col justify-center">
+              <HeaderStatistic {...habit} />
+              <div className="flex w-full justify-center">
+                <HeatMap datesDone={habit.datesDone} />
+              </div>
             </div>
           </BackgroundContainer>
         ))}

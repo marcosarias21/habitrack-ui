@@ -12,7 +12,7 @@ type Prop = {
 const HeatMap: React.FC<Prop> = ({ datesDone }) => {
   const { allValues, startDate, today } = useHeatMap(datesDone)
   return (
-    <div className="w-150 bg-gray-100 p-10">
+    <div className="w-70">
       <CalendarHeatmap
         startDate={startDate}
         endDate={today}
