@@ -1,9 +1,7 @@
 export const getDayDifference = (today: Date, dateCalendar: Date) => {
   today.setHours(0, 0, 0, 0)
-
   const selected = new Date(dateCalendar)
   selected.setHours(0, 0, 0, 0)
-
   const diffInMs = selected.getTime() - today.getTime()
   const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
   return diffInDays
@@ -23,7 +21,6 @@ export const verifyIsToday = (numberDayOfYear: number) => {
   const startOfYear = new Date(date.getFullYear(), 0, 0)
   const diff = date.getTime() - startOfYear.getTime()
   const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24))
-  console.log(dayOfYear)
 
   if (numberDayOfYear === dayOfYear) return 'today'
 

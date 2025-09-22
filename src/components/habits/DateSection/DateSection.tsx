@@ -1,9 +1,12 @@
+import type { Dispatch, SetStateAction } from 'react'
+
 interface Prop {
   fullDate: string
   dayName: string
   setDay: (arg: number) => void
   day: number
   nextOrPreviousDay: string
+  setDateCalendar: Dispatch<SetStateAction<Date | undefined>>
 }
 
 const DateSection: React.FC<Prop> = ({
@@ -12,7 +15,13 @@ const DateSection: React.FC<Prop> = ({
   setDay,
   day,
   nextOrPreviousDay,
+  setDateCalendar,
 }) => {
+  const handleBackToToday = () => {
+    setDay(new Date().getDay() - 1)
+    setDateCalendar(new Date())
+  }
+
   return (
     <div className="flex gap-2">
       <div className="flex w-25 flex-col gap-2">
@@ -37,7 +46,7 @@ const DateSection: React.FC<Prop> = ({
         {nextOrPreviousDay !== 'today' && (
           <button
             className="rounded border bg-black/80 px-2 py-1 font-medium text-white"
-            onClick={() => setDay(new Date().getDay() - 1)}
+            onClick={handleBackToToday}
           >
             Back to Today
           </button>
