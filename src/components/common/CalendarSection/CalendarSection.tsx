@@ -2,7 +2,7 @@ import { Calendar } from '@/components/ui/calendar'
 import type { Dispatch, SetStateAction } from 'react'
 
 interface Prop {
-  dateCalendar: Date
+  dateCalendar: Date | undefined
   setDateCalendar: Dispatch<SetStateAction<Date | undefined>>
 }
 

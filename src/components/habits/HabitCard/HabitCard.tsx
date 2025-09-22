@@ -24,7 +24,6 @@ const HabitCard: React.FC<Prop> = ({
   dateToCompare,
   dateNextOrPrevious,
 }) => {
-  console.log(dateNextOrPrevious)
   const createdDay = new Date(createdAt)
   const d = new Date()
   const date = d.toLocaleDateString('es-ar')

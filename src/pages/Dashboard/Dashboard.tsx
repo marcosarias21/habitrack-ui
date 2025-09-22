@@ -13,7 +13,11 @@ import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useHabitLogic from '@/hooks/useHabitLogic'
 import { useHabitStore } from '@/store/habitStore'
-import { getDayDifference } from '@/utils/dateUtils'
+import {
+  getDayDifference,
+  getDayOfYear,
+  verifyIsToday,
+} from '@/utils/dateUtils'
 import { useEffect, useState } from 'react'
 import { Header } from '@/components/layout/Header'
 import { FilterArea } from '@/components/common/FilterArea'
@@ -32,12 +36,17 @@ const Dashboard = () => {
   } = useHabitLogic(user, dayIndex, fullDate, day)
   const { setHabit, habit } = useHabitStore()
   const [dateCalendar, setDateCalendar] = useState<Date | undefined>(new Date())
+  const nextOrPreviousDay = verifyIsToday(getDayOfYear(date) ?? 0)
 
   useEffect(() => {
     if (dateCalendar) {
       setDay(getDayDifference(new Date(), dateCalendar))
     }
   }, [dateCalendar])
+
+  useEffect(() => {
+    setDateCalendar(date)
+  }, [day])
 
   return (
     <Container>
@@ -53,6 +62,8 @@ const Dashboard = () => {
                 dayName={dayName}
                 setDay={setDay}
                 day={day}
+                setDateCalendar={setDateCalendar}
+                nextOrPreviousDay={nextOrPreviousDay ?? ''}
               />
               <ModalCreateHabit createHabit={createHabit} />
             </div>
@@ -94,12 +105,10 @@ const Dashboard = () => {
       </section>
       <section className="col-span-3 mr-5 bg-[#fff] px-7">
         <StatisticsHabit percentageDone={percentageDone} />
-        {dateCalendar && (
-          <CalendarSection
-            dateCalendar={dateCalendar}
-            setDateCalendar={setDateCalendar}
-          />
-        )}
+        <CalendarSection
+          dateCalendar={dateCalendar}
+          setDateCalendar={setDateCalendar}
+        />
       </section>
     </Container>
   )
