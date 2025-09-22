@@ -2,6 +2,8 @@ import { BackgroundContainer } from '@/components/layout/BackgroundContainer'
 import { Container } from '@/components/layout/Container'
 import { Header } from '@/components/layout/Header'
 import { Sidebar } from '@/components/layout/Sidebar'
+import { HeaderStatistic } from '@/components/statistics/HeaderStatistic'
+import { HeatMap } from '@/components/statistics/HeatMap'
 import { StatCard } from '@/components/statistics/StatCard'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useStatistics from '@/hooks/useStatistics'
@@ -9,9 +11,9 @@ import { Construction, Grid, Smile } from 'lucide-react'
 
 const Statistics = () => {
   const { user } = useGetMyUser()
-  const { totalHabits, perfectDaysCount, averageDaily } = useStatistics(
-    user?._id ?? '',
-  )
+  const { totalHabits, perfectDaysCount, averageDaily, allHabits } =
+    useStatistics(user?._id ?? '')
+  console.log(totalHabits)
   return (
     <Container>
       <Sidebar />
@@ -36,6 +38,16 @@ const Statistics = () => {
             />
           </div>
         </BackgroundContainer>
+        {allHabits.map((habit) => (
+          <BackgroundContainer>
+            <div className="flex flex-col justify-center">
+              <HeaderStatistic {...habit} />
+              <div className="flex w-full justify-center">
+                <HeatMap datesDone={habit.datesDone} />
+              </div>
+            </div>
+          </BackgroundContainer>
+        ))}
       </section>
     </Container>
   )

@@ -12,7 +12,7 @@ export interface Habit {
 }
 
 export interface Area {
-  name: string
+  name: string | undefined
   value: string
   icon: React.ReactNode
 }

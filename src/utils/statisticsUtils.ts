@@ -37,3 +37,16 @@ export const getAverageDaily = (habits: Habit[]) => {
   const avgPerDay = totalCompletions / uniqueDays.size
   return avgPerDay
 }
+export const shiftDate = (date: Date, numDays: number) => {
+  const newDate = new Date(date)
+  newDate.setDate(newDate.getDate() + numDays)
+  return newDate
+}
+
+export const getRange = (count: number) => {
+  return Array.from({ length: count }, (_, i) => i)
+}
+
+export const getRandomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}

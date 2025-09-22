@@ -24,6 +24,7 @@ const useStatistics = (idUser: string) => {
     perfectDays,
     perfectDaysCount: perfectDays.length,
     averageDaily,
+    allHabits,
   }
 }
 
