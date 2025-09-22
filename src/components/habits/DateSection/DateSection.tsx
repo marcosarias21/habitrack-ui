@@ -3,9 +3,16 @@ interface Prop {
   dayName: string
   setDay: (arg: number) => void
   day: number
+  nextOrPreviousDay: string
 }
 
-const DateSection: React.FC<Prop> = ({ fullDate, dayName, setDay, day }) => {
+const DateSection: React.FC<Prop> = ({
+  fullDate,
+  dayName,
+  setDay,
+  day,
+  nextOrPreviousDay,
+}) => {
   return (
     <div className="flex gap-2">
       <div className="flex w-25 flex-col gap-2">
@@ -25,6 +32,16 @@ const DateSection: React.FC<Prop> = ({ fullDate, dayName, setDay, day }) => {
         >
           +
         </button>
+      </div>
+      <div>
+        {nextOrPreviousDay !== 'today' && (
+          <button
+            className="rounded border bg-black/80 px-2 py-1 font-medium text-white"
+            onClick={() => setDay(new Date().getDay() - 1)}
+          >
+            Back to Today
+          </button>
+        )}
       </div>
     </div>
   )

@@ -13,11 +13,12 @@ import useDataDay from '@/hooks/useDataDay'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useHabitLogic from '@/hooks/useHabitLogic'
 import { useHabitStore } from '@/store/habitStore'
-import { getDayDifference } from '@/utils/dateUtils'
+import { getDayDifference, verifyIsToday } from '@/utils/dateUtils'
 import { useEffect, useState } from 'react'
 import { Header } from '@/components/layout/Header'
 import { FilterArea } from '@/components/common/FilterArea'
 import { CalendarSection } from '@/components/common/CalendarSection'
+import { getDayOfYear } from 'date-fns'
 
 const Dashboard = () => {
   const { user } = useGetMyUser()
@@ -32,6 +33,7 @@ const Dashboard = () => {
   } = useHabitLogic(user, dayIndex, fullDate, day)
   const { setHabit, habit } = useHabitStore()
   const [dateCalendar, setDateCalendar] = useState<Date | undefined>(new Date())
+  const nextOrPreviousDay = verifyIsToday(getDayOfYear(date))
 
   useEffect(() => {
     if (dateCalendar) {
@@ -53,6 +55,7 @@ const Dashboard = () => {
                 dayName={dayName}
                 setDay={setDay}
                 day={day}
+                nextOrPreviousDay={nextOrPreviousDay ?? ''}
               />
               <ModalCreateHabit createHabit={createHabit} />
             </div>
