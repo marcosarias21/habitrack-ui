@@ -37,6 +37,7 @@ export const getAverageDaily = (habits: Habit[]) => {
   const avgPerDay = totalCompletions / uniqueDays.size
   return avgPerDay
 }
+
 export const shiftDate = (date: Date, numDays: number) => {
   const newDate = new Date(date)
   newDate.setDate(newDate.getDate() + numDays)
@@ -49,4 +50,39 @@ export const getRange = (count: number) => {
 
 export const getRandomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+export const getStreak = (habit: Habit) => {
+  const dates = habit.datesDone
+
+  if (dates.length === 0) return 0
+
+  const toDate = (str: string) => {
+    const [day, month, year] = str.split('/').map(Number)
+    return new Date(year, month - 1, day)
+  }
+
+  const sortedDates = [...new Set(dates)]
+    .map((d) => toDate(d))
+    .sort((a, b) => a.getTime() - b.getTime())
+
+  const { maxStreak } = sortedDates.reduce(
+    (acc, curr, i) => {
+      if (i === 0) return { ...acc, prev: curr }
+
+      const diffDays =
+        (curr.getTime() - acc.prev!.getTime()) / (1000 * 60 * 60 * 24)
+
+      const currentStreak = diffDays === 1 ? acc.currentStreak + 1 : 1
+
+      return {
+        prev: curr,
+        currentStreak,
+        maxStreak: Math.max(acc.maxStreak, currentStreak),
+      }
+    },
+    { prev: null as Date | null, currentStreak: 1, maxStreak: 1 },
+  )
+
+  return maxStreak
 }

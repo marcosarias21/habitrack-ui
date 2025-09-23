@@ -7,13 +7,13 @@ import { HeatMap } from '@/components/statistics/HeatMap'
 import { StatCard } from '@/components/statistics/StatCard'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useStatistics from '@/hooks/useStatistics'
+import { getStreak } from '@/utils/statisticsUtils'
 import { Construction, Grid, Smile } from 'lucide-react'
 
 const Statistics = () => {
   const { user } = useGetMyUser()
   const { totalHabits, perfectDaysCount, averageDaily, allHabits } =
     useStatistics(user?._id ?? '')
-  console.log(totalHabits)
   return (
     <Container>
       <Sidebar />
@@ -41,7 +41,7 @@ const Statistics = () => {
         {allHabits.map((habit) => (
           <BackgroundContainer>
             <div className="flex flex-col justify-center">
-              <HeaderStatistic {...habit} />
+              <HeaderStatistic {...habit} streak={getStreak(habit)} />
               <div className="flex w-full justify-center">
                 <HeatMap datesDone={habit.datesDone} />
               </div>
