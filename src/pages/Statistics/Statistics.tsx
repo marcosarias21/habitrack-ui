@@ -17,7 +17,7 @@ const Statistics = () => {
   return (
     <Container>
       <Sidebar />
-      <section className="col-span-10 flex flex-col gap-4">
+      <section className="col-span-10 flex h-full flex-col gap-4 overflow-auto">
         <Header _id="Statistics" email="Statistics" />
         <BackgroundContainer>
           <div className="grid grid-cols-3 gap-4">
@@ -40,7 +40,7 @@ const Statistics = () => {
         </BackgroundContainer>
         {allHabits.map((habit) => (
           <BackgroundContainer>
-            <div className="flex flex-col justify-center">
+            <div className="flex h-full flex-col justify-center">
               <HeaderStatistic {...habit} streak={getStreak(habit)} />
               <div className="flex w-full justify-center">
                 <HeatMap datesDone={habit.datesDone} />
