@@ -44,10 +44,6 @@ const Dashboard = () => {
     }
   }, [dateCalendar])
 
-  useEffect(() => {
-    setDateCalendar(date)
-  }, [day])
-
   return (
     <Container>
       <Sidebar />
