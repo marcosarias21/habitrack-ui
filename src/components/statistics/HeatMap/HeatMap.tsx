@@ -4,35 +4,42 @@ import type { Habit } from '@/interfaces/habit/Habit'
 import useHeatMap from '@/hooks/useHeatMap'
 import 'react-calendar-heatmap/dist/styles.css'
 import 'react-tooltip/dist/react-tooltip.css'
+import { ArrowUp } from 'lucide-react'
 
 type Prop = {
   datesDone: Habit['datesDone']
+  close: () => void
 }
 
-const HeatMap: React.FC<Prop> = ({ datesDone }) => {
+const HeatMap: React.FC<Prop> = ({ datesDone, close }) => {
   const { allValues, startDate, today } = useHeatMap(datesDone)
   return (
-    <div className="w-70">
-      <CalendarHeatmap
-        startDate={startDate}
-        endDate={today}
-        values={allValues}
-        classForValue={(value) => {
-          if (!value || value.count === 0) return 'color-empty'
-          return 'color-done'
-        }}
-        tooltipDataAttrs={(value) => {
-          if (!value || !value.date) return {}
-          return {
-            'data-tooltip-id': 'heatmap-tooltip',
-            'data-tooltip-content': `${
-              value.count ? 'Completado' : 'No completado'
-            }: ${value.date.toISOString().slice(0, 10)}`,
-          }
-        }}
-        showWeekdayLabels
-      />
-      <ReactTooltip id="heatmap-tooltip" place="top" effect="solid" />
+    <div className="flex w-full justify-center text-center">
+      <div className="w-90">
+        <CalendarHeatmap
+          startDate={startDate}
+          endDate={today}
+          values={allValues}
+          classForValue={(value) => {
+            if (!value || value.count === 0) return 'color-empty'
+            return 'color-done'
+          }}
+          tooltipDataAttrs={(value) => {
+            if (!value || !value.date) return {}
+            return {
+              'data-tooltip-id': 'heatmap-tooltip',
+              'data-tooltip-content': `${
+                value.count ? 'Completado' : 'No completado'
+              }: ${value.date.toISOString().slice(0, 10)}`,
+            }
+          }}
+          showWeekdayLabels
+        />
+        <ReactTooltip id="heatmap-tooltip" place="top" effect="solid" />
+        <button onClick={close} className="text-gray-300">
+          <ArrowUp />
+        </button>
+      </div>
     </div>
   )
 }

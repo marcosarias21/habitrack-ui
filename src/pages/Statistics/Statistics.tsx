@@ -8,12 +8,15 @@ import { StatCard } from '@/components/statistics/StatCard'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useStatistics from '@/hooks/useStatistics'
 import { getStreak } from '@/utils/statisticsUtils'
-import { Construction, Grid, Smile } from 'lucide-react'
+import { ArrowDown, Construction, Grid, Smile } from 'lucide-react'
+import { useState } from 'react'
 
 const Statistics = () => {
   const { user } = useGetMyUser()
   const { totalHabits, perfectDaysCount, averageDaily, allHabits } =
     useStatistics(user?._id ?? '')
+  const [isShowMap, setIsShowMap] = useState<number | null>(null)
+
   return (
     <Container>
       <Sidebar />
@@ -38,12 +41,24 @@ const Statistics = () => {
             />
           </div>
         </BackgroundContainer>
-        {allHabits.map((habit) => (
+        {allHabits.map((habit, i) => (
           <BackgroundContainer>
             <div className="flex h-full flex-col justify-center">
               <HeaderStatistic {...habit} streak={getStreak(habit)} />
               <div className="flex w-full justify-center">
-                <HeatMap datesDone={habit.datesDone} />
+                {isShowMap == i ? (
+                  <HeatMap
+                    datesDone={habit.datesDone}
+                    close={() => setIsShowMap(null)}
+                  />
+                ) : (
+                  <button
+                    className="text-gray-300"
+                    onClick={() => setIsShowMap(i)}
+                  >
+                    <ArrowDown />
+                  </button>
+                )}
               </div>
             </div>
           </BackgroundContainer>
