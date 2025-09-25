@@ -1,3 +1,4 @@
+import { AccordionContainer } from '@/components/layout/AccordionContainer'
 import { BackgroundContainer } from '@/components/layout/BackgroundContainer'
 import { Container } from '@/components/layout/Container'
 import { Header } from '@/components/layout/Header'
@@ -8,14 +9,12 @@ import { StatCard } from '@/components/statistics/StatCard'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useStatistics from '@/hooks/useStatistics'
 import { getStreak } from '@/utils/statisticsUtils'
-import { ArrowDown, Construction, Grid, Smile } from 'lucide-react'
-import { useState } from 'react'
+import { Construction, Grid, Smile } from 'lucide-react'
 
 const Statistics = () => {
   const { user } = useGetMyUser()
   const { totalHabits, perfectDaysCount, averageDaily, allHabits } =
     useStatistics(user?._id ?? '')
-  const [isShowMap, setIsShowMap] = useState<number | null>(null)
 
   return (
     <Container>
@@ -41,24 +40,14 @@ const Statistics = () => {
             />
           </div>
         </BackgroundContainer>
-        {allHabits.map((habit, i) => (
+        {allHabits.map((habit) => (
           <BackgroundContainer>
             <div className="flex h-full flex-col justify-center">
               <HeaderStatistic {...habit} streak={getStreak(habit)} />
               <div className="flex w-full justify-center">
-                {isShowMap == i ? (
-                  <HeatMap
-                    datesDone={habit.datesDone}
-                    close={() => setIsShowMap(null)}
-                  />
-                ) : (
-                  <button
-                    className="text-gray-300"
-                    onClick={() => setIsShowMap(i)}
-                  >
-                    <ArrowDown />
-                  </button>
-                )}
+                <AccordionContainer>
+                  <HeatMap datesDone={habit.datesDone} />
+                </AccordionContainer>
               </div>
             </div>
           </BackgroundContainer>
