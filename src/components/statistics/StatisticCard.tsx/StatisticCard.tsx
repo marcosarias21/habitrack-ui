@@ -6,7 +6,7 @@ import React from 'react'
 interface Prop extends Habit {
   streak: number
 }
-const HeaderStatistic: React.FC<Prop> = ({
+const StatisticCard: React.FC<Prop> = ({
   name,
   datesDone,
   streak,
@@ -48,4 +48,4 @@ const HeaderStatistic: React.FC<Prop> = ({
   )
 }
 
-export default HeaderStatistic
+export default StatisticCard
