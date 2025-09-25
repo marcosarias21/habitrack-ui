@@ -4,14 +4,13 @@ import type { Habit } from '@/interfaces/habit/Habit'
 import useHeatMap from '@/hooks/useHeatMap'
 import 'react-calendar-heatmap/dist/styles.css'
 import 'react-tooltip/dist/react-tooltip.css'
-import { ArrowUp } from 'lucide-react'
+import './heatmap.css'
 
 type Prop = {
   datesDone: Habit['datesDone']
-  close: () => void
 }
 
-const HeatMap: React.FC<Prop> = ({ datesDone, close }) => {
+const HeatMap: React.FC<Prop> = ({ datesDone }) => {
   const { allValues, startDate, today } = useHeatMap(datesDone)
   return (
     <div className="flex w-full justify-center text-center">
@@ -22,10 +21,12 @@ const HeatMap: React.FC<Prop> = ({ datesDone, close }) => {
           values={allValues}
           classForValue={(value) => {
             if (!value || value.count === 0) return 'color-empty'
-            return 'color-done'
+            return 'color-github-1'
           }}
           tooltipDataAttrs={(value) => {
-            if (!value || !value.date) return {}
+            if (!value || !value.date) {
+              return {} as { [key: string]: string }
+            }
             return {
               'data-tooltip-id': 'heatmap-tooltip',
               'data-tooltip-content': `${
@@ -35,10 +36,7 @@ const HeatMap: React.FC<Prop> = ({ datesDone, close }) => {
           }}
           showWeekdayLabels
         />
-        <ReactTooltip id="heatmap-tooltip" place="top" effect="solid" />
-        <button onClick={close} className="text-gray-300">
-          <ArrowUp />
-        </button>
+        <ReactTooltip id="heatmap-tooltip" place="top" />
       </div>
     </div>
   )

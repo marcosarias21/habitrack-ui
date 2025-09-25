@@ -7,6 +7,7 @@ interface Prop {
   day: number
   nextOrPreviousDay: string
   setDateCalendar: Dispatch<SetStateAction<Date | undefined>>
+  date: Date
 }
 
 const DateSection: React.FC<Prop> = ({
@@ -15,11 +16,16 @@ const DateSection: React.FC<Prop> = ({
   setDay,
   day,
   nextOrPreviousDay,
-  setDateCalendar,
 }) => {
   const handleBackToToday = () => {
-    setDay(new Date().getDay() - 1)
-    setDateCalendar(new Date())
+    setDay(0)
+  }
+  const handleNextDay = () => {
+    setDay(day + 1)
+  }
+
+  const handlePreviousDay = () => {
+    setDay(day - 1)
   }
 
   return (
@@ -31,12 +37,12 @@ const DateSection: React.FC<Prop> = ({
       <div className="flex h-fit gap-2">
         <button
           className="rounded bg-blue-500 px-2 text-white"
-          onClick={() => setDay(day - 1)}
+          onClick={handlePreviousDay}
         >
           -
         </button>
         <button
-          onClick={() => setDay(day + 1)}
+          onClick={handleNextDay}
           className="rounded border-1 bg-blue-500 px-2 text-white"
         >
           +

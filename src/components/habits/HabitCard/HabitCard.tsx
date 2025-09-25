@@ -52,7 +52,7 @@ const HabitCard: React.FC<Prop> = ({
                   Complete
                 </Button>
               )
-            : isCompleted && <Badge className="bg-green-400">Completado</Badge>}
+            : isCompleted && <Badge className="bg-green-400">Completed</Badge>}
           {day == 'next' && (
             <Button className="mt-2 bg-gray-500">Blocked</Button>
           )}
