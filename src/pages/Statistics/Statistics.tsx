@@ -1,11 +1,11 @@
 import { AccordionContainer } from '@/components/layout/AccordionContainer'
 import { BackgroundContainer } from '@/components/layout/BackgroundContainer'
 import { Container } from '@/components/layout/Container'
-import { Header } from '@/components/layout/Header'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { HeaderStatistic } from '@/components/statistics/HeaderStatistic'
 import { HeatMap } from '@/components/statistics/HeatMap'
 import { StatCard } from '@/components/statistics/StatCard'
+import { StatisticCard } from '@/components/statistics/StatisticCard.tsx'
 import useGetMyUser from '@/hooks/useGetMyUser'
 import useStatistics from '@/hooks/useStatistics'
 import { getStreak } from '@/utils/statisticsUtils'
@@ -20,7 +20,7 @@ const Statistics = () => {
     <Container>
       <Sidebar />
       <section className="col-span-10 flex h-full flex-col gap-4 overflow-auto">
-        <Header _id="Statistics" email="Statistics" />
+        <HeaderStatistic />
         <BackgroundContainer>
           <div className="grid grid-cols-3 gap-4">
             <StatCard
@@ -43,7 +43,7 @@ const Statistics = () => {
         {allHabits.map((habit) => (
           <BackgroundContainer>
             <div className="flex h-full flex-col justify-center">
-              <HeaderStatistic {...habit} streak={getStreak(habit)} />
+              <StatisticCard {...habit} streak={getStreak(habit)} />
               <div className="flex w-full justify-center">
                 <AccordionContainer>
                   <HeatMap datesDone={habit.datesDone} />

@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import type { UserAuthenticated } from '@/interfaces/user/UserAuthenticated'
-import { Search } from 'lucide-react'
 
 const Header = ({ email }: UserAuthenticated) => {
   return (
@@ -11,21 +10,8 @@ const Header = ({ email }: UserAuthenticated) => {
         </h2>
         <span className="text-sm text-gray-500">Welcome back!</span>
       </div>
-      <div className="flex w-full gap-10">
-        <div className="relative flex w-full">
-          <input
-            className="h-fit w-full rounded-2xl bg-[#f7f9fb] py-2 pl-10"
-            placeholder="Search..."
-            type="text"
-          />
-          <Search
-            size={20}
-            className="absolute top-2.5 left-3 text-[#5d6e80]"
-          />
-        </div>
-        <div>
-          <Button>System</Button>
-        </div>
+      <div>
+        <Button>System</Button>
       </div>
     </div>
   )
