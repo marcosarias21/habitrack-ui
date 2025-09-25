@@ -25,7 +25,9 @@ const HeatMap: React.FC<Prop> = ({ datesDone, close }) => {
             return 'color-done'
           }}
           tooltipDataAttrs={(value) => {
-            if (!value || !value.date) return {}
+            if (!value || !value.date) {
+              return {} as { [key: string]: string }
+            }
             return {
               'data-tooltip-id': 'heatmap-tooltip',
               'data-tooltip-content': `${
@@ -33,9 +35,8 @@ const HeatMap: React.FC<Prop> = ({ datesDone, close }) => {
               }: ${value.date.toISOString().slice(0, 10)}`,
             }
           }}
-          showWeekdayLabels
         />
-        <ReactTooltip id="heatmap-tooltip" place="top" effect="solid" />
+        <ReactTooltip id="heatmap-tooltip" place="top" />
         <button onClick={close} className="text-gray-300">
           <ArrowUp />
         </button>
